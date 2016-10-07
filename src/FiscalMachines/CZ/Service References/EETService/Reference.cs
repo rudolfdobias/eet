@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace eetcz.EETService {
+namespace FiscalMachines.CZ.EETService {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -17,11 +17,11 @@ namespace eetcz.EETService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://fs.mfcr.cz/eet/OdeslaniTrzby", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        eetcz.EETService.OdeslaniTrzbyResponse OdeslaniTrzby(eetcz.EETService.OdeslaniTrzbyRequest request);
+        FiscalMachines.CZ.EETService.OdeslaniTrzbyResponse OdeslaniTrzby(FiscalMachines.CZ.EETService.OdeslaniTrzbyRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://fs.mfcr.cz/eet/OdeslaniTrzby", ReplyAction="*")]
-        System.Threading.Tasks.Task<eetcz.EETService.OdeslaniTrzbyResponse> OdeslaniTrzbyAsync(eetcz.EETService.OdeslaniTrzbyRequest request);
+        System.Threading.Tasks.Task<FiscalMachines.CZ.EETService.OdeslaniTrzbyResponse> OdeslaniTrzbyAsync(FiscalMachines.CZ.EETService.OdeslaniTrzbyRequest request);
     }
     
     /// <remarks/>
@@ -1124,18 +1124,18 @@ namespace eetcz.EETService {
     public partial class OdeslaniTrzbyRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://fs.mfcr.cz/eet/schema/v3", Order=0)]
-        public eetcz.EETService.TrzbaHlavickaType Hlavicka;
+        public FiscalMachines.CZ.EETService.TrzbaHlavickaType Hlavicka;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://fs.mfcr.cz/eet/schema/v3", Order=1)]
-        public eetcz.EETService.TrzbaDataType Data;
+        public FiscalMachines.CZ.EETService.TrzbaDataType Data;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://fs.mfcr.cz/eet/schema/v3", Order=2)]
-        public eetcz.EETService.TrzbaKontrolniKodyType KontrolniKody;
+        public FiscalMachines.CZ.EETService.TrzbaKontrolniKodyType KontrolniKody;
         
         public OdeslaniTrzbyRequest() {
         }
         
-        public OdeslaniTrzbyRequest(eetcz.EETService.TrzbaHlavickaType Hlavicka, eetcz.EETService.TrzbaDataType Data, eetcz.EETService.TrzbaKontrolniKodyType KontrolniKody) {
+        public OdeslaniTrzbyRequest(FiscalMachines.CZ.EETService.TrzbaHlavickaType Hlavicka, FiscalMachines.CZ.EETService.TrzbaDataType Data, FiscalMachines.CZ.EETService.TrzbaKontrolniKodyType KontrolniKody) {
             this.Hlavicka = Hlavicka;
             this.Data = Data;
             this.KontrolniKody = KontrolniKody;
@@ -1148,7 +1148,7 @@ namespace eetcz.EETService {
     public partial class OdeslaniTrzbyResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://fs.mfcr.cz/eet/schema/v3", Order=0)]
-        public eetcz.EETService.OdpovedHlavickaType Hlavicka;
+        public FiscalMachines.CZ.EETService.OdpovedHlavickaType Hlavicka;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://fs.mfcr.cz/eet/schema/v3", Order=1)]
         [System.Xml.Serialization.XmlElementAttribute("Chyba", typeof(OdpovedChybaType))]
@@ -1157,12 +1157,12 @@ namespace eetcz.EETService {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://fs.mfcr.cz/eet/schema/v3", Order=2)]
         [System.Xml.Serialization.XmlElementAttribute("Varovani")]
-        public eetcz.EETService.OdpovedVarovaniType[] Varovani;
+        public FiscalMachines.CZ.EETService.OdpovedVarovaniType[] Varovani;
         
         public OdeslaniTrzbyResponse() {
         }
         
-        public OdeslaniTrzbyResponse(eetcz.EETService.OdpovedHlavickaType Hlavicka, object Item, eetcz.EETService.OdpovedVarovaniType[] Varovani) {
+        public OdeslaniTrzbyResponse(FiscalMachines.CZ.EETService.OdpovedHlavickaType Hlavicka, object Item, FiscalMachines.CZ.EETService.OdpovedVarovaniType[] Varovani) {
             this.Hlavicka = Hlavicka;
             this.Item = Item;
             this.Varovani = Varovani;
@@ -1170,12 +1170,12 @@ namespace eetcz.EETService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface EETChannel : eetcz.EETService.EET, System.ServiceModel.IClientChannel {
+    public interface EETChannel : FiscalMachines.CZ.EETService.EET, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class EETClient : System.ServiceModel.ClientBase<eetcz.EETService.EET>, eetcz.EETService.EET {
+    public partial class EETClient : System.ServiceModel.ClientBase<FiscalMachines.CZ.EETService.EET>, FiscalMachines.CZ.EETService.EET {
         
         public EETClient() {
         }
@@ -1197,22 +1197,22 @@ namespace eetcz.EETService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        eetcz.EETService.OdeslaniTrzbyResponse eetcz.EETService.EET.OdeslaniTrzby(eetcz.EETService.OdeslaniTrzbyRequest request) {
+        FiscalMachines.CZ.EETService.OdeslaniTrzbyResponse FiscalMachines.CZ.EETService.EET.OdeslaniTrzby(FiscalMachines.CZ.EETService.OdeslaniTrzbyRequest request) {
             return base.Channel.OdeslaniTrzby(request);
         }
         
-        public eetcz.EETService.OdpovedHlavickaType OdeslaniTrzby(eetcz.EETService.TrzbaHlavickaType Hlavicka, eetcz.EETService.TrzbaDataType Data, eetcz.EETService.TrzbaKontrolniKodyType KontrolniKody, out object Item, out eetcz.EETService.OdpovedVarovaniType[] Varovani) {
-            eetcz.EETService.OdeslaniTrzbyRequest inValue = new eetcz.EETService.OdeslaniTrzbyRequest();
+        public FiscalMachines.CZ.EETService.OdpovedHlavickaType OdeslaniTrzby(FiscalMachines.CZ.EETService.TrzbaHlavickaType Hlavicka, FiscalMachines.CZ.EETService.TrzbaDataType Data, FiscalMachines.CZ.EETService.TrzbaKontrolniKodyType KontrolniKody, out object Item, out FiscalMachines.CZ.EETService.OdpovedVarovaniType[] Varovani) {
+            FiscalMachines.CZ.EETService.OdeslaniTrzbyRequest inValue = new FiscalMachines.CZ.EETService.OdeslaniTrzbyRequest();
             inValue.Hlavicka = Hlavicka;
             inValue.Data = Data;
             inValue.KontrolniKody = KontrolniKody;
-            eetcz.EETService.OdeslaniTrzbyResponse retVal = ((eetcz.EETService.EET)(this)).OdeslaniTrzby(inValue);
+            FiscalMachines.CZ.EETService.OdeslaniTrzbyResponse retVal = ((FiscalMachines.CZ.EETService.EET)(this)).OdeslaniTrzby(inValue);
             Item = retVal.Item;
             Varovani = retVal.Varovani;
             return retVal.Hlavicka;
         }
         
-        public System.Threading.Tasks.Task<eetcz.EETService.OdeslaniTrzbyResponse> OdeslaniTrzbyAsync(eetcz.EETService.OdeslaniTrzbyRequest request) {
+        public System.Threading.Tasks.Task<FiscalMachines.CZ.EETService.OdeslaniTrzbyResponse> OdeslaniTrzbyAsync(FiscalMachines.CZ.EETService.OdeslaniTrzbyRequest request) {
             return base.Channel.OdeslaniTrzbyAsync(request);
         }
     }
