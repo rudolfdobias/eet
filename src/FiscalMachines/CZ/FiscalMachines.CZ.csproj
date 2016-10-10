@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FiscalMachines.CZ</RootNamespace>
     <AssemblyName>FiscalMachines.CZ</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,7 +44,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client.cs" />
+    <Compile Include="DTO\Data\TaxPayerRepresentationType.cs" />
+    <Compile Include="DTO\Data\Revenue.cs" />
+    <Compile Include="DTO\Data\EETSendRevenueResult.cs" />
+    <Compile Include="DTO\Data\TaxPayer.cs" />
+    <Compile Include="DTO\Data\TaxPayerRepresentation.cs" />
+    <Compile Include="EETClients.cs" />
     <Compile Include="EETEnvironment.cs" />
+    <Compile Include="EETMode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\EETService\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -56,6 +64,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Certificates\01000003.p12">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Certificates\01000004.p12">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Certificates\01000005.p12">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Certificates\ca.cer">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Certificates\ca.cer.pem">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Certificates\ca.crl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Certificates\ca.crl.pem">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Service References\EETService\EET.wsdl" />
     <None Include="Service References\EETService\FiscalMachines.CZ.EETService.OdeslaniTrzbyResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
