@@ -10,3 +10,4 @@ c:\dev\mews\EET\src\MewsEet\bin\Debug\MewsEet.dll
 c:\dev\mews\EET\src\MewsEet\bin\Debug\MewsEet.pdb
 c:\dev\mews\EET\src\MewsEet\obj\Debug\MewsEet.dll
 c:\dev\mews\EET\src\MewsEet\obj\Debug\MewsEet.pdb
+c:\dev\mews\EET\src\MewsEet\obj\Debug\MewsEet.csprojResolveAssemblyReference.cache
