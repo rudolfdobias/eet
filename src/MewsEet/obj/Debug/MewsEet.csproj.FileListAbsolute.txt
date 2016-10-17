@@ -1,0 +1,12 @@
+c:\dev\mews\EET\src\MewsEet\bin\Debug\Certificates\01000003.p12
+c:\dev\mews\EET\src\MewsEet\bin\Debug\Certificates\01000004.p12
+c:\dev\mews\EET\src\MewsEet\bin\Debug\Certificates\01000005.p12
+c:\dev\mews\EET\src\MewsEet\bin\Debug\Certificates\ca.cer
+c:\dev\mews\EET\src\MewsEet\bin\Debug\Certificates\ca.cer.pem
+c:\dev\mews\EET\src\MewsEet\bin\Debug\Certificates\ca.crl
+c:\dev\mews\EET\src\MewsEet\bin\Debug\Certificates\ca.crl.pem
+c:\dev\mews\EET\src\MewsEet\bin\Debug\MewsEet.dll.config
+c:\dev\mews\EET\src\MewsEet\bin\Debug\MewsEet.dll
+c:\dev\mews\EET\src\MewsEet\bin\Debug\MewsEet.pdb
+c:\dev\mews\EET\src\MewsEet\obj\Debug\MewsEet.dll
+c:\dev\mews\EET\src\MewsEet\obj\Debug\MewsEet.pdb
