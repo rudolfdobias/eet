@@ -22,11 +22,6 @@ namespace MewsEet.Dto
                 throw new ArgumentException("The value cannot be lower than -99 999 999,99 Kč.");
             }
 
-            if (decimal.Round(value, 2) != value)
-            {
-                throw new ArgumentException("The currency value cannot be more precise than 2 decimal places.");
-            }
-
             if (!string.Format(NumberFormatInfo.InvariantInfo, "{0:F2}", value).IsCurrencyValue())
             {
                 throw new ArgumentException("The string representation of the currency value does not match the expected pattern, exactly 2 decimal places have to be specified.");
@@ -58,5 +53,4 @@ namespace MewsEet.Dto
             return value.Value;
         }
     }
-
 }
