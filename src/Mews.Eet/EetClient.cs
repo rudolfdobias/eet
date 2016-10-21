@@ -24,7 +24,7 @@ namespace Mews.Eet
 
         public Task<SendRevenueResult> SendRevenueAsync(RevenueRecord record, EetMode mode = EetMode.Operational)
         {
-            var client = EetClients.Create(Environment);
+            var client = EetClients.Create(Environment, record.Identification);
             var request = GetRevenueRequest(record, mode);
             var taskCompletionSource = new TaskCompletionSource<SendRevenueResult>();
             client.OdeslaniTrzbyAsync(request).ContinueWith(t =>
