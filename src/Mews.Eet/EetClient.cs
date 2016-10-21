@@ -50,7 +50,7 @@ namespace Mews.Eet
             var header = new TrzbaHlavickaType
             {
                 uuid_zpravy = record.Identifier.ToString(),
-                dat_odesl = CzechDateTime(DateTimeProvider.Now),
+                dat_odesl = EetDateTime(DateTimeProvider.Now),
                 prvni_zaslani = record.IsFirstAttempt,
                 overeni = mode == EetMode.Verification,
                 overeniSpecified = mode == EetMode.Verification
@@ -61,11 +61,11 @@ namespace Mews.Eet
             var data = new TrzbaDataType
             {
                 dic_popl = record.Identification.TaxPayerIdentifier.Value,
-                dic_poverujiciho = record.Identification.MandantingTaxPayerIdentifier.Value,
+                dic_poverujiciho = record.Identification.MandantingTaxPayerIdentifier?.Value,
                 id_pokl = record.Identification.RegistryIdentifier.Value,
                 id_provoz = record.Identification.PremisesIdentifier.Value,
                 porad_cis = record.BillNumber.Value,
-                dat_trzby = CzechDateTime(record.Revenue.Accepted),
+                dat_trzby = EetDateTime(record.Revenue.Accepted),
                 celk_trzba = record.Revenue.Gross.Value,
 
                 zakl_nepodl_dphSpecified = revenue.NotTaxable.IsDefined(),
@@ -99,14 +99,30 @@ namespace Mews.Eet
                 pouzit_zboz3 = revenue.StandardTaxRate.GetOrDefault(r => r.Goods)
             };
 
-            var checkCodes = new TrzbaKontrolniKodyType();
+            var checkCodes = new TrzbaKontrolniKodyType()
+            {
+                bkp = new BkpElementType
+                {
+                    digest = BkpDigestType.SHA1,
+                    encoding = BkpEncodingType.base16,
+                    Text = new[] { record.SecurityCode }
+                },
+                pkp = new PkpElementType
+                {
+                    cipher = PkpCipherType.RSA2048,
+                    digest = PkpDigestType.SHA256,
+                    encoding = PkpEncodingType.base64,
+                    Text = new[] { record.Signature }
+                }
+            };
             return new OdeslaniTrzbyRequest(header, data, checkCodes);
         }
 
-        private DateTime CzechDateTime(DateTimeWithTimeZone dateTimeWithTimeZone)
+        private DateTime EetDateTime(DateTimeWithTimeZone dateTimeWithTimeZone)
         {
             var dateTimeUtc = TimeZoneInfo.ConvertTimeToUtc(dateTimeWithTimeZone.DateTime, dateTimeWithTimeZone.TimeZoneInfo);
-            return TimeZoneInfo.ConvertTimeFromUtc(dateTimeUtc, DateTimeWithTimeZone.CzechTimeZone);
+            var czDateTime = TimeZoneInfo.ConvertTimeFromUtc(dateTimeUtc, DateTimeWithTimeZone.CzechTimeZone);
+            return DateTime.SpecifyKind(new DateTime(czDateTime.Ticks - czDateTime.Ticks % TimeSpan.TicksPerSecond), DateTimeKind.Local);
         }
     }
 }

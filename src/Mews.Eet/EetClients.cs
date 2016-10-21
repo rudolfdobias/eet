@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ServiceModel;
 
 namespace Mews.Eet
 {
@@ -8,7 +9,7 @@ namespace Mews.Eet
         {
             if (environment == EetEnvironment.Production)
             {
-                return new EetService.EETClient();
+                return new EetService.EETClient(new BasicHttpsBinding(BasicHttpsSecurityMode.Transport), new EndpointAddress("https://pg.eet.cz:443/eet/services/EETServiceSOAP/v3"));
             }
 
             throw new NotImplementedException($"The environment {environment} is not currently supported.");

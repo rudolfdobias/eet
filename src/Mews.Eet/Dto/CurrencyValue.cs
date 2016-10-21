@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 
 namespace Mews.Eet.Dto
 {
@@ -20,11 +19,6 @@ namespace Mews.Eet.Dto
             if (value < -99999999.99m)
             {
                 throw new ArgumentException("The value cannot be lower than -99 999 999,99 Kč.");
-            }
-
-            if (!StringHelpers.SafeMatches(String.Format(NumberFormatInfo.InvariantInfo, "{0:F2}", value), Patterns.CurrencyValue))
-            {
-                throw new ArgumentException("The string representation of the currency value does not match the expected pattern, exactly 2 decimal places have to be specified.");
             }
 
             Value = value;

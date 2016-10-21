@@ -28,7 +28,7 @@ namespace Mews.Eet.Dto
 
             var date = confirmation != null ? response.Hlavicka.dat_prij : response.Hlavicka.dat_odmit;
 
-            Id = Guid.Parse(response.Hlavicka.uuid_zpravy);
+            Id = String.IsNullOrWhiteSpace(response.Hlavicka.uuid_zpravy) ? (Guid?)null : Guid.Parse(response.Hlavicka.uuid_zpravy);
             Issued = new DateTimeWithTimeZone(date, DateTimeWithTimeZone.CzechTimeZone);
             SecurityCode = response.Hlavicka.bkp;
             Success = confirmation != null ? new SendRevenueSuccess(confirmation.fik) : null;
@@ -40,7 +40,7 @@ namespace Mews.Eet.Dto
             Warnings = GetWarnings(response.Varovani);
         }
 
-        public Guid Id { get; }
+        public Guid? Id { get; }
 
         public bool IsPlayground { get; }
 

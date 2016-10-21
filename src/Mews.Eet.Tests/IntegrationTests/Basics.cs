@@ -27,6 +27,8 @@ namespace Mews.Eet.Tests.IntegrationTests
             );
             var client = new EetClient();
             var response = client.SendRevenue(record);
+            Assert.IsNull(response.Error);
+            Assert.IsNotNull(response.Success);
         }
     }
 }

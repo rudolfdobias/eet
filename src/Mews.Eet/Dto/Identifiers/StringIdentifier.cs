@@ -7,7 +7,7 @@ namespace Mews.Eet.Dto.Identifiers
         protected StringIdentifier(string value, string pattern)
             : base(value)
         {
-            if (!StringHelpers.SafeMatches(Value, Pattern))
+            if (!StringHelpers.SafeMatches(value, pattern))
             {
                 throw new ArgumentException($"The value '{value}' does not match the pattern '{pattern}'");
             }
