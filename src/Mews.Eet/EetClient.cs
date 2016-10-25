@@ -1,5 +1,5 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Mews.Eet.Converters;
 using Mews.Eet.Dto;
 using Mews.Eet.EetService;
 using Mews.Eet.Extensions;
@@ -50,7 +50,7 @@ namespace Mews.Eet
             var header = new TrzbaHlavickaType
             {
                 uuid_zpravy = record.Identifier.ToString(),
-                dat_odesl = EetDateTime(DateTimeProvider.Now),
+                dat_odesl = DateTimeConverter.ToEetDateTime(DateTimeProvider.Now),
                 prvni_zaslani = record.IsFirstAttempt,
                 overeni = mode == EetMode.Verification,
                 overeniSpecified = mode == EetMode.Verification
@@ -65,7 +65,7 @@ namespace Mews.Eet
                 id_pokl = record.Identification.RegistryIdentifier.Value,
                 id_provoz = record.Identification.PremisesIdentifier.Value,
                 porad_cis = record.BillNumber.Value,
-                dat_trzby = EetDateTime(record.Revenue.Accepted),
+                dat_trzby = DateTimeConverter.ToEetDateTime(record.Revenue.Accepted),
                 celk_trzba = record.Revenue.Gross.Value,
 
                 zakl_nepodl_dphSpecified = revenue.NotTaxable.IsDefined(),
@@ -116,13 +116,6 @@ namespace Mews.Eet
                 }
             };
             return new OdeslaniTrzbyRequest(header, data, checkCodes);
-        }
-
-        private DateTime EetDateTime(DateTimeWithTimeZone dateTimeWithTimeZone)
-        {
-            var dateTimeUtc = TimeZoneInfo.ConvertTimeToUtc(dateTimeWithTimeZone.DateTime, dateTimeWithTimeZone.TimeZoneInfo);
-            var czDateTime = TimeZoneInfo.ConvertTimeFromUtc(dateTimeUtc, DateTimeWithTimeZone.CzechTimeZone);
-            return DateTime.SpecifyKind(new DateTime(czDateTime.Ticks - czDateTime.Ticks % TimeSpan.TicksPerSecond), DateTimeKind.Local);
         }
     }
 }

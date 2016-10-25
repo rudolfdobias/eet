@@ -12,12 +12,12 @@ namespace Mews.Eet.Tests.IntegrationTests
         {
             var record = new RevenueRecord(
                 identification: new Identification(
-                    taxPayerIdentifier: new TaxIdentifier(Fixtures.First.TaxId),
+                    taxPayerIdentifier: new TaxIdentifier(Fixtures.Second.TaxId),
                     registryIdentifier: new RegistryIdentifier("01"),
-                    premisesIdentifier: new PremisesIdentifier(Fixtures.First.PremisesId),
+                    premisesIdentifier: new PremisesIdentifier(Fixtures.Second.PremisesId),
                     certificate: new Certificate(
-                        password: Fixtures.First.CertificatePassword,
-                        data: Fixtures.First.CertificateData
+                        password: Fixtures.Second.CertificatePassword,
+                        data: Fixtures.Second.CertificateData
                     )
                 ),     
                 revenue: new Revenue(

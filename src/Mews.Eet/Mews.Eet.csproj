@@ -36,7 +36,9 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IdentityModel" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -46,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\DateTimeConverter.cs" />
     <Compile Include="Dto\Certificate.cs" />
     <Compile Include="Dto\Identifiers\BillNumber.cs" />
     <Compile Include="Dto\Identifiers\Identifier.cs" />
@@ -80,12 +83,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Soap\Signing\Signer\SecurityTokenReference.cs" />
+    <Compile Include="Soap\Signing\Signer\SignedXmlWithId.cs" />
+    <Compile Include="Soap\Signing\Signer\SoapMessage.cs" />
+    <Compile Include="Soap\Signing\Signer\SoapSigner.cs" />
+    <Compile Include="Soap\Signing\SigningBehavior.cs" />
     <Compile Include="StringHelpers.cs" />
+    <Compile Include="Soap\Signing\SigningInterceptor.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Certificates\01000003.p12">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -107,6 +117,10 @@
     <None Include="Certificates\ca.crl.pem">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Certificates\Playground\EET_CA1_Playground-ca.crt" />
+    <None Include="Certificates\Playground\EET_CA1_Playground-CZ00000019.p12" />
+    <None Include="Certificates\Playground\EET_CA1_Playground-CZ1212121218.p12" />
+    <None Include="Certificates\Playground\EET_CA1_Playground-CZ683555118.p12" />
     <None Include="Mews.ruleset" />
     <None Include="packages.config" />
     <None Include="Service References\EetService\EET.wsdl" />
@@ -143,6 +157,7 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
