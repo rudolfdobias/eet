@@ -4,12 +4,12 @@ using System.Security.Cryptography.X509Certificates;
 using System.Security.Cryptography.Xml;
 using System.Xml;
 
-namespace SignSoapMessage
+namespace Mews.Eet.Soap.Signing
 {
     public enum SignAlgorithm
     {
-        SHA1 = 0,
-        SHA256 = 1
+        Sha1 = 0,
+        Sha256 = 1
     }
 
     public class SoapSigner
@@ -46,7 +46,7 @@ namespace SignSoapMessage
 
             SignedXmlWithId signedXml = new SignedXmlWithId(xmlDoc);
 
-            if (signAlgorithm == SignAlgorithm.SHA1)
+            if (signAlgorithm == SignAlgorithm.Sha1)
             {
                 signedXml.SignedInfo.SignatureMethod = "http://www.w3.org/2000/09/xmldsig#rsa-sha1";
             }
@@ -57,7 +57,7 @@ namespace SignSoapMessage
 
             RSACryptoServiceProvider rsaKey = null;
 
-            if (signAlgorithm == SignAlgorithm.SHA1)
+            if (signAlgorithm == SignAlgorithm.Sha1)
             {
                 rsaKey = (RSACryptoServiceProvider)certificate.PrivateKey;
             }
@@ -79,7 +79,7 @@ namespace SignSoapMessage
             signedXml.SignedInfo.CanonicalizationMethod = SignedXml.XmlDsigExcC14NTransformUrl;
 
             Reference reference = new Reference { Uri = "#_1" };
-            if (signAlgorithm == SignAlgorithm.SHA1)
+            if (signAlgorithm == SignAlgorithm.Sha1)
             {
                 reference.DigestMethod = "http://www.w3.org/2000/09/xmldsig#sha1";
             }

@@ -2,7 +2,7 @@
 using System.Security.Cryptography.X509Certificates;
 using System.Xml;
 
-namespace SignSoapMessage
+namespace Mews.Eet.Soap.Signing
 {
     public class SoapMessage
     {
@@ -56,7 +56,7 @@ namespace SignSoapMessage
                 tempDoc.PreserveWhitespace = true;
                 tempDoc.LoadXml(doc.OuterXml);
 
-                return signer.SignMessage(tempDoc, Certificate, SignAlgorithm.SHA256);
+                return signer.SignMessage(tempDoc, Certificate, SignAlgorithm.Sha256);
             }
 
             return doc;

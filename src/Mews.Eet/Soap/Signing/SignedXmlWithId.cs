@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography.Xml;
 using System.Xml;
 
-namespace SignSoapMessage
+namespace Mews.Eet.Soap.Signing
 {
     public class SignedXmlWithId : SignedXml
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Mews.Eet.EetService;
+using Mews.Eet.Dto.Wsdl;
 
 namespace Mews.Eet.Dto
 {
@@ -21,23 +21,23 @@ namespace Mews.Eet.Dto
             Warnings = warnings ?? Enumerable.Empty<Fault>();
         }
 
-        internal SendRevenueResult(OdeslaniTrzbyResponse response)
+        internal SendRevenueResult(SendRevenueXmlResponse response)
         {
-            var confirmation = response.Item as OdpovedPotvrzeniType;
-            var rejection = response.Item as OdpovedChybaType;
+            var confirmation = response.Item as ResponseSuccess;
+            var rejection = response.Item as ResponseError;
 
-            var date = confirmation != null ? response.Hlavicka.dat_prij : response.Hlavicka.dat_odmit;
+            var date = confirmation != null ? response.Header.Accepted : response.Header.Rejected;
 
-            Id = String.IsNullOrWhiteSpace(response.Hlavicka.uuid_zpravy) ? (Guid?)null : Guid.Parse(response.Hlavicka.uuid_zpravy);
+            Id = String.IsNullOrWhiteSpace(response.Header.MessageUuid) ? (Guid?)null : Guid.Parse(response.Header.MessageUuid);
             Issued = new DateTimeWithTimeZone(date, DateTimeWithTimeZone.CzechTimeZone);
-            SecurityCode = response.Hlavicka.bkp;
-            Success = confirmation != null ? new SendRevenueSuccess(confirmation.fik) : null;
+            SecurityCode = response.Header.SecurityCode;
+            Success = confirmation != null ? new SendRevenueSuccess(confirmation.FiscalCode) : null;
             Error = new SendRevenueError(new Fault(
-                code: rejection.kod,
+                code: rejection.Kod,
                 message: String.Join("\n", rejection.Text)
             ));
-            IsPlayground = confirmation != null ? confirmation.testSpecified && confirmation.test : rejection.testSpecified && rejection.test;
-            Warnings = GetWarnings(response.Varovani);
+            IsPlayground = confirmation != null ? confirmation.TestSpecified && confirmation.Test : rejection.TestSpecified && rejection.Test;
+            Warnings = GetWarnings(response.Warning);
         }
 
         public Guid? Id { get; }
@@ -54,9 +54,9 @@ namespace Mews.Eet.Dto
 
         public IEnumerable<Fault> Warnings { get; }
 
-        private static IEnumerable<Fault> GetWarnings(OdpovedVarovaniType[] warnings)
+        private static IEnumerable<Fault> GetWarnings(ResponseWarning[] warnings)
         {
-            return warnings.Select(w => new Fault(w.kod_varov, String.Join("\n", w.Text)));
+            return warnings.Select(w => new Fault(w.Code, String.Join("\n", w.Text)));
         }
     }
 }

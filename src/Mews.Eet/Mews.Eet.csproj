@@ -57,6 +57,22 @@
     <Compile Include="Dto\Identifiers\StringIdentifier.cs" />
     <Compile Include="Dto\Identifiers\RegistryIdentifier.cs" />
     <Compile Include="Dto\Identifiers\TaxIdentifier.cs" />
+    <Compile Include="Dto\Wsdl\SecurityCodeDigestType.cs" />
+    <Compile Include="Dto\Wsdl\SecurityCodeElementType.cs" />
+    <Compile Include="Dto\Wsdl\SecurityCodeEncodingType.cs" />
+    <Compile Include="Dto\Wsdl\SendRevenueXmlRequest.cs" />
+    <Compile Include="Dto\Wsdl\SendRevenueXmlResponse.cs" />
+    <Compile Include="Dto\Wsdl\ResponseError.cs" />
+    <Compile Include="Dto\Wsdl\ResponseHeader.cs" />
+    <Compile Include="Dto\Wsdl\ResponseSuccess.cs" />
+    <Compile Include="Dto\Wsdl\ResponseWarning.cs" />
+    <Compile Include="Dto\Wsdl\SignatureCipherType.cs" />
+    <Compile Include="Dto\Wsdl\SignatureDigestType.cs" />
+    <Compile Include="Dto\Wsdl\SignatureElementType.cs" />
+    <Compile Include="Dto\Wsdl\SignatureEncodingType.cs" />
+    <Compile Include="Dto\Wsdl\RevenueDataType.cs" />
+    <Compile Include="Dto\Wsdl\RevenueHeaderType.cs" />
+    <Compile Include="Dto\Wsdl\RevenueCheckCode.cs" />
     <Compile Include="EetClient.cs" />
     <Compile Include="Dto\SendRevenueError.cs" />
     <Compile Include="Dto\SendRevenueSuccess.cs" />
@@ -71,31 +87,21 @@
     <Compile Include="Dto\Revenue.cs" />
     <Compile Include="Dto\SendRevenueResult.cs" />
     <Compile Include="DateTimeProvider.cs" />
-    <Compile Include="EetClients.cs" />
     <Compile Include="EetEnvironment.cs" />
     <Compile Include="EetMode.cs" />
     <Compile Include="Extensions\CurrencyValueExtensions.cs" />
     <Compile Include="Extensions\TaxRateItemsExtensions.cs" />
+    <Compile Include="Messages\SendRevenueMessage.cs" />
     <Compile Include="Patterns.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service References\EetService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Soap\Signing\Signer\SecurityTokenReference.cs" />
-    <Compile Include="Soap\Signing\Signer\SignedXmlWithId.cs" />
-    <Compile Include="Soap\Signing\Signer\SoapMessage.cs" />
-    <Compile Include="Soap\Signing\Signer\SoapSigner.cs" />
-    <Compile Include="Soap\Signing\SigningBehavior.cs" />
+    <Compile Include="Soap\Client\SoapWsSecurityClient.cs" />
+    <Compile Include="Soap\Signing\SecurityTokenReference.cs" />
+    <Compile Include="Soap\Signing\SignedXmlWithId.cs" />
+    <Compile Include="Soap\Signing\SoapMessage.cs" />
+    <Compile Include="Soap\Signing\SoapSigner.cs" />
     <Compile Include="StringHelpers.cs" />
-    <Compile Include="Soap\Signing\SigningInterceptor.cs" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
     <None Include="Certificates\01000003.p12">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -123,41 +129,12 @@
     <None Include="Certificates\Playground\EET_CA1_Playground-CZ683555118.p12" />
     <None Include="Mews.ruleset" />
     <None Include="packages.config" />
-    <None Include="Service References\EetService\EET.wsdl" />
-    <None Include="Service References\EetService\EETXMLSchema.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\EetService\Mews.Eet.EetService.OdeslaniTrzbyResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\EetService\Mews.Eet.EetService.OdpovedHlavickaType.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\EetService\Mews.Eet.EetService.OdpovedVarovaniType.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\EetService\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\EetService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\EetService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\EetService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
