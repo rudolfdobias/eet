@@ -11,6 +11,7 @@ namespace Mews.Eet.Dto
             Password = password;
             Data = data;
             Key = ComputeKey();
+            X509Certificate2 = new X509Certificate2(Data, Password);
         }
 
         public string Password { get; }
@@ -18,6 +19,8 @@ namespace Mews.Eet.Dto
         public byte[] Data { get; }
 
         public RSACryptoServiceProvider Key { get; }
+
+        public X509Certificate2 X509Certificate2 { get; }
 
         private RSACryptoServiceProvider ComputeKey()
         {

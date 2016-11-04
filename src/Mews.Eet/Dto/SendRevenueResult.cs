@@ -33,10 +33,10 @@ namespace Mews.Eet.Dto
             SecurityCode = response.Header.SecurityCode;
             Success = confirmation != null ? new SendRevenueSuccess(confirmation.FiscalCode) : null;
             Error = new SendRevenueError(new Fault(
-                code: rejection.Kod,
+                code: rejection.Code,
                 message: String.Join("\n", rejection.Text)
             ));
-            IsPlayground = confirmation != null ? confirmation.TestSpecified && confirmation.Test : rejection.TestSpecified && rejection.Test;
+            IsPlayground = confirmation != null ? confirmation.IsPlaygroundSpecified && confirmation.IsPlayground : rejection.IsPlaygroundSpecified && rejection.IsPlayground;
             Warnings = GetWarnings(response.Warning);
         }
 

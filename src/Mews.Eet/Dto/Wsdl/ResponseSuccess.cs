@@ -11,9 +11,9 @@ namespace Mews.Eet.Dto.Wsdl
         public string FiscalCode { get; set; }
 
         [XmlAttribute(AttributeName = "test")]
-        public bool Test { get; set; }
+        public bool IsPlayground { get; set; }
 
         [XmlIgnore]
-        public bool TestSpecified { get; set; }
+        public bool IsPlaygroundSpecified { get; set; }
     }
 }

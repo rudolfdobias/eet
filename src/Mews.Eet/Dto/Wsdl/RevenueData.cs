@@ -5,7 +5,7 @@ namespace Mews.Eet.Dto.Wsdl
 {
     [Serializable]
     [XmlType(Namespace = "http://fs.mfcr.cz/eet/schema/v3")]
-    public class RevenueDataType
+    public class RevenueData
     {
         [XmlAttribute(AttributeName = "dic_popl")]
         public string TaxPayerTaxIdentifier { get; set; }

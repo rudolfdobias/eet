@@ -3,7 +3,7 @@ using Mews.Eet.Dto;
 using Mews.Eet.Dto.Wsdl;
 using Mews.Eet.Extensions;
 
-namespace Mews.Eet.Messages
+namespace Mews.Eet.Communication
 {
     public class SendRevenueMessage
     {
@@ -17,9 +17,9 @@ namespace Mews.Eet.Messages
 
         private EetMode EetMode { get; }
 
-        public SendRevenueXmlRequest GetRequest()
+        public SendRevenueXmlMessage GetXmlMessage()
         {
-            var header = new RevenueHeaderType
+            var header = new RevenueHeader
             {
                 MessageUuid = RevenueRecord.Identifier.ToString(),
                 Sent = DateTimeConverter.ToEetDateTime(DateTimeProvider.Now),
@@ -30,7 +30,7 @@ namespace Mews.Eet.Messages
 
             var revenue = RevenueRecord.Revenue;
 
-            var data = new RevenueDataType
+            var data = new RevenueData
             {
                 TaxPayerTaxIdentifier = RevenueRecord.Identification.TaxPayerIdentifier.Value,
                 MandantingTaxPayerIdentifier = RevenueRecord.Identification.MandantingTaxPayerIdentifier?.Value,
@@ -87,7 +87,12 @@ namespace Mews.Eet.Messages
                     Text = new[] { RevenueRecord.Signature }
                 }
             };
-            return new SendRevenueXmlRequest(header, data, checkCodes);
+            return new SendRevenueXmlMessage
+            {
+                Header = header,
+                Data = data,
+                CheckCodes = checkCodes
+            };
         }
     }
 }

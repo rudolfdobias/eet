@@ -8,13 +8,13 @@ namespace Mews.Eet.Dto.Wsdl
     public class ResponseError
     {
         [XmlAttribute(AttributeName = "kod")]
-        public int Kod { get; set; }
+        public int Code { get; set; }
 
         [XmlAttribute(AttributeName = "test")]
-        public bool Test { get; set; }
+        public bool IsPlayground { get; set; }
 
         [XmlIgnore]
-        public bool TestSpecified { get; set; }
+        public bool IsPlaygroundSpecified { get; set; }
 
         [XmlText]
         public string[] Text { get; set; }

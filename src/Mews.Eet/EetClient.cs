@@ -1,21 +1,17 @@
 ﻿using System.Threading.Tasks;
+using Mews.Eet.Communication;
 using Mews.Eet.Dto;
-using Mews.Eet.Messages;
-using Mews.Eet.Soap.Client;
 
 namespace Mews.Eet
 {
     public class EetClient
     {
-        public EetClient(EetEnvironment environment = EetEnvironment.Production)
+        public EetClient(Certificate certificate, EetEnvironment environment = EetEnvironment.Production)
         {
-            Environment = environment;
-            SoapClient = new SoapWsSecurityClient(endpointUrl: GetEnvironmentUrl(environment));
+            EetSoapClient = new EetSoapClient(certificate, environment);
         }
 
-        private SoapWsSecurityClient SoapClient { get; }
-
-        private EetEnvironment Environment { get; }
+        private EetSoapClient EetSoapClient { get; }
 
         public SendRevenueResult SendRevenue(RevenueRecord record, EetMode mode = EetMode.Operational)
         {
@@ -26,29 +22,8 @@ namespace Mews.Eet
 
         public Task<SendRevenueResult> SendRevenueAsync(RevenueRecord record, EetMode mode = EetMode.Operational)
         {
-            var request = new SendRevenueMessage(record, mode).GetRequest();
-            var taskCompletionSource = new TaskCompletionSource<SendRevenueResult>();
-            SoapClient.Post(request, RevenueUrl).ContinueWith(t =>
-            {
-                if (t.IsFaulted)
-                {
-                    taskCompletionSource.TrySetException(t.Exception);
-                }
-                else if (t.IsCanceled)
-                {
-                    taskCompletionSource.TrySetCanceled();
-                }
-                else
-                {
-                    taskCompletionSource.TrySetResult(new SendRevenueResult(t.Result));
-                }
-            });
-            return taskCompletionSource.Task;
-        }
-
-        private static string GetEnvironmentUrl(EetEnvironment eetEnvironment)
-        {
-            return "https://pg.eet.cz:443/eet/services/EETServiceSOAP/v3";
+            var task = EetSoapClient.SendRevenue(new SendRevenueMessage(record, mode).GetXmlMessage());
+            return AsyncHelpers.SafeContinuationAction(task, r => new SendRevenueResult(r));
         }
     }
 }

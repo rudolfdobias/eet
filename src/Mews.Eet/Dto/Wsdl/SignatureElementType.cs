@@ -16,7 +16,7 @@ namespace Mews.Eet.Dto.Wsdl
         [XmlAttribute(AttributeName = "encoding")]
         public SignatureEncodingType Encoding { get; set; }
 
-        [XmlAttribute]
+        [XmlText]
         public string[] Text { get; set; }
     }
 }

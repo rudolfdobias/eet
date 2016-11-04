@@ -17,12 +17,5 @@ namespace Mews.Eet.Dto.Wsdl
         [MessageBodyMember(Namespace = "http://fs.mfcr.cz/eet/schema/v3", Order = 2)]
         [XmlElement("Varovani")]
         public ResponseWarning[] Warning;
-
-        public SendRevenueXmlResponse(ResponseHeader header, object item, ResponseWarning[] warnings)
-        {
-            Header = header;
-            Item = item;
-            Warning = warnings;
-        }
     }
 }

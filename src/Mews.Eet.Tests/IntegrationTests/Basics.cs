@@ -10,22 +10,23 @@ namespace Mews.Eet.Tests.IntegrationTests
         [TestMethod]
         public void SendRevenueSimple()
         {
+            var certificate = new Certificate(
+                password: Fixtures.Second.CertificatePassword,
+                data: Fixtures.Second.CertificateData
+            );
             var record = new RevenueRecord(
                 identification: new Identification(
                     taxPayerIdentifier: new TaxIdentifier(Fixtures.Second.TaxId),
                     registryIdentifier: new RegistryIdentifier("01"),
                     premisesIdentifier: new PremisesIdentifier(Fixtures.Second.PremisesId),
-                    certificate: new Certificate(
-                        password: Fixtures.Second.CertificatePassword,
-                        data: Fixtures.Second.CertificateData
-                    )
+                    certificate: certificate
                 ),     
                 revenue: new Revenue(
                     gross: new CurrencyValue(1234.00m)
                 ),
                 billNumber: new BillNumber("2016-123")
             );
-            var client = new EetClient();
+            var client = new EetClient(certificate, EetEnvironment.Playground);
             var response = client.SendRevenue(record);
             Assert.IsNull(response.Error);
             Assert.IsNotNull(response.Success);
