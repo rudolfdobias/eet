@@ -16,14 +16,13 @@ namespace Mews.Eet
         public SendRevenueResult SendRevenue(RevenueRecord record, EetMode mode = EetMode.Operational)
         {
             var task = SendRevenueAsync(record, mode);
-            task.Wait();
             return task.Result;
         }
 
         public Task<SendRevenueResult> SendRevenueAsync(RevenueRecord record, EetMode mode = EetMode.Operational)
         {
             var task = EetSoapClient.SendRevenue(new SendRevenueMessage(record, mode).GetXmlMessage());
-            return AsyncHelpers.SafeContinuationAction(task, r => new SendRevenueResult(r));
+            return task.ContinueWith(t => Task.FromResult(new SendRevenueResult(t.Result))).Unwrap();
         }
     }
 }

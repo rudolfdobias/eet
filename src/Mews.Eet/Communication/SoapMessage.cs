@@ -67,8 +67,18 @@ namespace Mews.Eet.Communication
 
         public XmlDocument GetSignedXmlDocument(X509Certificate2 certificate, SignAlgorithm signAlgorithm)
         {
+            var temporaryXmlDocument = new XmlDocument();
+            temporaryXmlDocument.PreserveWhitespace = true;
+            temporaryXmlDocument.LoadXml(GetXmlDocument().OuterXml);
+
             var signer = new SoapSigner(certificate, signAlgorithm);
-            return signer.SignMessage(GetXmlDocument());
+            return signer.SignMessage(temporaryXmlDocument);
+        }
+
+        public bool VerifySignature()
+        {
+            // TODO
+            return true;
         }
     }
 }

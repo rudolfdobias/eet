@@ -30,6 +30,7 @@ namespace Mews.Eet.Tests.IntegrationTests
             var response = client.SendRevenue(record);
             Assert.IsNull(response.Error);
             Assert.IsNotNull(response.Success);
+            Assert.IsNotNull(response.Success.FiscalCode);
         }
     }
 }

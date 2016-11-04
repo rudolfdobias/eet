@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography.X509Certificates;
+﻿using System;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using System.Xml;
 
@@ -23,11 +24,13 @@ namespace Mews.Eet.Communication
         private XmlManipulator XmlManipulator { get; }
 
         public Task<TOut> Send<TIn, TOut>(TIn messageBodyObject, string operation)
+            where TIn : class, new()
+            where TOut : class, new()
         {
             var messageBodyXmlElement = XmlManipulator.Serialize(messageBodyObject);
             var soapMessage = new SoapMessage(new SoapMessagePart(messageBodyXmlElement));
             var xmlDocument = Certificate == null ? soapMessage.GetXmlDocument() : soapMessage.GetSignedXmlDocument(Certificate, SignAlgorithm);
-            return AsyncHelpers.SafeContinuationAction(HttpClient.Send(xmlDocument.OuterXml, operation), response => XmlManipulator.Deserialize<TOut>(GetSoapBody(response)));
+            return HttpClient.Send(xmlDocument.OuterXml, operation).ContinueWith(t => Task.FromResult(XmlManipulator.Deserialize<TOut>(GetSoapBody(t.Result)))).Unwrap();
         }
 
         private XmlElement GetSoapBody(string soapXmlString)
@@ -36,7 +39,11 @@ namespace Mews.Eet.Communication
             xmlDocument.LoadXml(soapXmlString);
 
             var soapMessage = SoapMessage.FromSoapXml(xmlDocument);
-            return soapMessage.Body.XmlElement;
+            if (!soapMessage.VerifySignature())
+            {
+                throw new Exception("The SOAP message signature is not valid.");
+            }
+            return soapMessage.Body.XmlElement.FirstChild as XmlElement;
         }
     }
 }

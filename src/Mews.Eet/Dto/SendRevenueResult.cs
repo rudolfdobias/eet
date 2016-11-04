@@ -32,10 +32,10 @@ namespace Mews.Eet.Dto
             Issued = new DateTimeWithTimeZone(date, DateTimeWithTimeZone.CzechTimeZone);
             SecurityCode = response.Header.SecurityCode;
             Success = confirmation != null ? new SendRevenueSuccess(confirmation.FiscalCode) : null;
-            Error = new SendRevenueError(new Fault(
+            Error = rejection != null ? new SendRevenueError(new Fault(
                 code: rejection.Code,
                 message: String.Join("\n", rejection.Text)
-            ));
+            )) : null;
             IsPlayground = confirmation != null ? confirmation.IsPlaygroundSpecified && confirmation.IsPlayground : rejection.IsPlaygroundSpecified && rejection.IsPlayground;
             Warnings = GetWarnings(response.Warning);
         }
@@ -56,6 +56,10 @@ namespace Mews.Eet.Dto
 
         private static IEnumerable<Fault> GetWarnings(ResponseWarning[] warnings)
         {
+            if (warnings == null)
+            {
+                return Enumerable.Empty<Fault>();
+            }
             return warnings.Select(w => new Fault(w.Code, String.Join("\n", w.Text)));
         }
     }

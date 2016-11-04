@@ -48,7 +48,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AsyncHelpers.cs" />
     <Compile Include="Communication\SoapHttpClient.cs" />
     <Compile Include="Communication\SoapMessagePart.cs" />
     <Compile Include="Converters\DateTimeConverter.cs" />

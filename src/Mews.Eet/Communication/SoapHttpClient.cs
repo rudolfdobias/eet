@@ -25,13 +25,7 @@ namespace Mews.Eet.Communication
                 new Uri(EndpointUrl),
                 new StringContent(body, Encoding.UTF8, "application/x-www-form-urlencoded")
             );
-            return AsyncHelpers.SafeContinuationAction(task, response =>
-            {
-                // TODO: Is there a better way how to handle a nested task?
-                var readTask = response.Content.ReadAsStringAsync();
-                readTask.Wait();
-                return readTask.Result;
-            });
+            return task.ContinueWith(t => t.Result.Content.ReadAsStringAsync()).Unwrap();
         }
     }
 }

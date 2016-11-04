@@ -1,21 +1,18 @@
-﻿using System.ServiceModel;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace Mews.Eet.Dto.Wsdl
 {
-    [MessageContract(WrapperName = "Odpoved", WrapperNamespace = "http://fs.mfcr.cz/eet/schema/v3", IsWrapped = true)]
+    [XmlRoot(ElementName = "Odpoved", Namespace = "http://fs.mfcr.cz/eet/schema/v3")]
     public class SendRevenueXmlResponse
     {
-        [MessageBodyMember(Namespace = "http://fs.mfcr.cz/eet/schema/v3", Order = 0, Name = "Hlavicka")]
+        [XmlElement(Namespace = "http://fs.mfcr.cz/eet/schema/v3", Order = 0, ElementName = "Hlavicka")]
         public ResponseHeader Header;
 
-        [MessageBodyMember(Namespace = "http://fs.mfcr.cz/eet/schema/v3", Order = 1)]
-        [XmlElement("Chyba", typeof(ResponseError))]
-        [XmlElement("Potvrzeni", typeof(ResponseSuccess))]
+        [XmlElement(ElementName = "Chyba", Type = typeof(ResponseError), Namespace = "http://fs.mfcr.cz/eet/schema/v3", Order = 1)]
+        [XmlElement(ElementName = "Potvrzeni", Type = typeof(ResponseSuccess), Namespace = "http://fs.mfcr.cz/eet/schema/v3", Order = 1)]
         public object Item;
 
-        [MessageBodyMember(Namespace = "http://fs.mfcr.cz/eet/schema/v3", Order = 2)]
-        [XmlElement("Varovani")]
+        [XmlElement(ElementName = "Varovani", Namespace = "http://fs.mfcr.cz/eet/schema/v3", Order = 2)]
         public ResponseWarning[] Warning;
     }
 }
