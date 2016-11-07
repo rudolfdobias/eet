@@ -8,7 +8,7 @@ namespace Mews.Eet.Communication
     {
         public EetSoapClient(Certificate certificate, EetEnvironment environment)
         {
-            var subdomain = environment == EetEnvironment.Production ? "pg" : "pg";
+            var subdomain = environment == EetEnvironment.Production ? "prod" : "pg";
             SoapClient = new SoapClient($"https://{subdomain}.eet.cz:443/eet/services/EETServiceSOAP/v3", certificate.X509Certificate2);
         }
 

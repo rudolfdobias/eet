@@ -7,7 +7,7 @@ namespace Mews.Eet.Communication
     {
         public SoapMessagePart(string bodyXml)
         {
-            if (string.IsNullOrEmpty(bodyXml))
+            if (String.IsNullOrEmpty(bodyXml))
             {
                 throw new ArgumentException("Content of SOAP message part cannot be empty.");
             }

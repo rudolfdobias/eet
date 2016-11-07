@@ -9,7 +9,7 @@ namespace Mews.Eet.Dto
     {
         public SendRevenueResult(Guid id, DateTimeWithTimeZone issued, string securityCode, SendRevenueSuccess success, SendRevenueError error, bool isPlayground, IEnumerable<Fault> warnings)
         {
-            if ((success != null && error != null) || (success == null && error == null))
+            if ((success == null) == (error == null))
             {
                 throw new ArgumentException("Either error or success has to be non-null.");
             }

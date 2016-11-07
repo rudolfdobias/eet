@@ -15,8 +15,7 @@ namespace Mews.Eet
 
         public SendRevenueResult SendRevenue(RevenueRecord record, EetMode mode = EetMode.Operational)
         {
-            var task = SendRevenueAsync(record, mode);
-            return task.Result;
+            return SendRevenueAsync(record, mode).Result;
         }
 
         public Task<SendRevenueResult> SendRevenueAsync(RevenueRecord record, EetMode mode = EetMode.Operational)

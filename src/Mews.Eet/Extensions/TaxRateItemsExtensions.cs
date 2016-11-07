@@ -12,7 +12,7 @@ namespace Mews.Eet.Extensions
 
         public static bool IsValueDefined(this TaxRateItem item, Func<TaxRateItem, CurrencyValue> valueSelector)
         {
-            return item.IsDefined() && valueSelector(item) != null;
+            return item.IsDefined() && valueSelector(item).IsDefined();
         }
 
         public static decimal GetOrDefault(this TaxRateItem item, Func<TaxRateItem, CurrencyValue> valueSelector)

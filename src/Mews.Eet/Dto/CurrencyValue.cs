@@ -6,9 +6,10 @@ namespace Mews.Eet.Dto
     {
         public CurrencyValue(decimal value)
         {
-            if (Decimal.Round(value, 2) != value)
+            var decimalPlaces = BitConverter.GetBytes(Decimal.GetBits(value)[3])[2];
+            if (decimalPlaces != 2)
             {
-                throw new ArgumentException("The currency value cannot be more precise than 2 decimal places.");
+                throw new ArgumentException("EET requires the currency values to be reported with 2 decimal places.");
             }
 
             if (value > 99999999.99m)
