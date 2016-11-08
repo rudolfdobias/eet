@@ -16,7 +16,7 @@ That is why we even introduce wrappers for simple datatypes.
 Various usages are demonstrated in our test cases.
 
 ### Simplest usage example
-```
+```csharp
 var certificate = new Certificate(
     password: "certificatePassword",
     data: certificateContentsByteArray
@@ -35,7 +35,7 @@ var record = new RevenueRecord(
 );
 var client = new EetClient(certificate);
 var response = client.SendRevenue(record);
-if(response.isSuccess())
+if (response.isSuccess())
 {
   var fiscalCode = response.Success.FiscalCode;
 }
