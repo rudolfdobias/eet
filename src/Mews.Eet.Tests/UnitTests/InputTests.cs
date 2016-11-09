@@ -1,66 +1,65 @@
 ﻿using System;
 using Mews.Eet.Dto.Identifiers;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Mews.Eet.Tests.UnitTests
 {
-    [TestClass]
     public class InputTests
     {
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [Fact]
         public void TaxIdValidationWorks()
         {
-            new TaxIdentifier("abcd");
+            Assert.Throws<ArgumentException>(() => new TaxIdentifier("abcd"));
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [Fact]
         public void RegistryIdValidationWorks()
         {
-            new RegistryIdentifier(Guid.NewGuid().ToString());
+            Assert.Throws<ArgumentException>(() => new RegistryIdentifier(Guid.NewGuid().ToString()));
         }
 
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [Fact]
         public void BillNumberValidationWorks()
         {
-            new BillNumber(Guid.NewGuid().ToString());
+            Assert.Throws<ArgumentException>(() => new BillNumber(Guid.NewGuid().ToString()));
         }
 
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [Fact]
         public void PremisesIdValidationWorks()
         {
-            new PremisesIdentifier(0);
+            Assert.Throws<ArgumentException>(() => new PremisesIdentifier(0));
         }
 
-        [TestMethod]
+        [Fact]
         public void TaxIdWorks()
         {
-            Assert.IsNotNull(new TaxIdentifier("CZ12345678"));
+            var ex = Record.Exception(() => new TaxIdentifier("CZ12345678"));
+            Assert.Null(ex);
         }
 
-        [TestMethod]
+        [Fact]
         public void RegistryIdWorks()
         {
-            Assert.IsNotNull(new RegistryIdentifier("1"));
+            var ex = Record.Exception(() => new RegistryIdentifier("1"));
+            Assert.Null(ex);
         }
 
 
-        [TestMethod]
+        [Fact]
         public void BillNumberWorks()
         {
-            Assert.IsNotNull(new BillNumber("2016020004"));
+            var ex = Record.Exception(() => new BillNumber("2016020004"));
+            Assert.Null(ex);
         }
 
 
-        [TestMethod]
+        [Fact]
         public void PremisesIdWorks()
         {
-            Assert.IsNotNull(new PremisesIdentifier(1));
+            var ex = Record.Exception(() => new PremisesIdentifier(1));
+            Assert.Null(ex);
         }
     }
 }

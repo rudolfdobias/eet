@@ -60,7 +60,7 @@
     <Compile Include="Dto\Identifiers\RegistryIdentifier.cs" />
     <Compile Include="Dto\Identifiers\TaxIdentifier.cs" />
     <Compile Include="Dto\Wsdl\SecurityCodeDigestType.cs" />
-    <Compile Include="Dto\Wsdl\SecurityCodeElementType.cs" />
+    <Compile Include="Dto\Wsdl\SecurityCode.cs" />
     <Compile Include="Dto\Wsdl\SecurityCodeEncodingType.cs" />
     <Compile Include="Dto\Wsdl\SendRevenueXmlMessage.cs" />
     <Compile Include="Dto\Wsdl\SendRevenueXmlResponse.cs" />
@@ -70,11 +70,11 @@
     <Compile Include="Dto\Wsdl\ResponseWarning.cs" />
     <Compile Include="Dto\Wsdl\SignatureCipherType.cs" />
     <Compile Include="Dto\Wsdl\SignatureDigestType.cs" />
-    <Compile Include="Dto\Wsdl\SignatureElementType.cs" />
+    <Compile Include="Dto\Wsdl\Signature.cs" />
     <Compile Include="Dto\Wsdl\SignatureEncodingType.cs" />
     <Compile Include="Dto\Wsdl\RevenueData.cs" />
     <Compile Include="Dto\Wsdl\RevenueHeader.cs" />
-    <Compile Include="Dto\Wsdl\RevenueCheckCode.cs" />
+    <Compile Include="Dto\Wsdl\RevenueSecurityCode.cs" />
     <Compile Include="EetClient.cs" />
     <Compile Include="Dto\SendRevenueError.cs" />
     <Compile Include="Dto\SendRevenueSuccess.cs" />
@@ -104,36 +104,6 @@
     <Compile Include="Communication\SoapSigner.cs" />
     <Compile Include="StringHelpers.cs" />
     <Compile Include="XmlManipulator.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Certificates\01000003.p12">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Certificates\01000004.p12">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Certificates\01000005.p12">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Certificates\ca.cer">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Certificates\ca.cer.pem">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Certificates\ca.crl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Certificates\ca.crl.pem">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Certificates\Playground\EET_CA1_Playground-ca.crt" />
-    <None Include="Certificates\Playground\EET_CA1_Playground-CZ00000019.p12" />
-    <None Include="Certificates\Playground\EET_CA1_Playground-CZ1212121218.p12" />
-    <None Include="Certificates\Playground\EET_CA1_Playground-CZ683555118.p12" />
-    <None Include="Mews.Eet.nuspec" />
-    <None Include="Mews.ruleset" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />

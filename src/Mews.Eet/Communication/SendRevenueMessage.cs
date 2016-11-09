@@ -19,7 +19,17 @@ namespace Mews.Eet.Communication
 
         public SendRevenueXmlMessage GetXmlMessage()
         {
-            var header = new RevenueHeader
+            return new SendRevenueXmlMessage
+            {
+                Header = GetRevenueHeader(),
+                Data = GetRevenueData(),
+                SecurityCode = GetRevenueSecurityCode()
+            };
+        }
+
+        private RevenueHeader GetRevenueHeader()
+        {
+            return new RevenueHeader
             {
                 MessageUuid = RevenueRecord.Identifier.ToString(),
                 Sent = DateTimeConverter.ToEetDateTime(DateTimeProvider.Now),
@@ -27,10 +37,12 @@ namespace Mews.Eet.Communication
                 Verification = EetMode == EetMode.Verification,
                 VerificationSpecified = EetMode == EetMode.Verification
             };
+        }
 
+        private RevenueData GetRevenueData()
+        {
             var revenue = RevenueRecord.Revenue;
-
-            var data = new RevenueData
+            return new RevenueData
             {
                 TaxPayerTaxIdentifier = RevenueRecord.Identification.TaxPayerIdentifier.Value,
                 MandantingTaxPayerIdentifier = RevenueRecord.Identification.MandantingTaxPayerIdentifier?.Value,
@@ -70,28 +82,25 @@ namespace Mews.Eet.Communication
                 StandartRateGoodsSpecified = revenue.StandardTaxRate.IsValueDefined(r => r.Goods),
                 StandartRateGoods = revenue.StandardTaxRate.GetOrDefault(r => r.Goods)
             };
+        }
 
-            var checkCodes = new RevenueCheckCode()
+        private RevenueSecurityCode GetRevenueSecurityCode()
+        {
+            return new RevenueSecurityCode()
             {
-                SecurityCode = new SecurityCodeElementType
+                SecurityCode = new SecurityCode
                 {
                     Digest = SecurityCodeDigestType.Sha1,
                     Encoding = SecurityCodeEncodingType.Base16,
                     Text = new[] { RevenueRecord.SecurityCode }
                 },
-                Signature = new SignatureElementType
+                Signature = new Signature
                 {
                     Cipher = SignatureCipherType.Rsa2048,
                     Digest = SignatureDigestType.Sha256,
                     Encoding = SignatureEncodingType.Base64,
                     Text = new[] { RevenueRecord.Signature }
                 }
-            };
-            return new SendRevenueXmlMessage
-            {
-                Header = header,
-                Data = data,
-                CheckCodes = checkCodes
             };
         }
     }

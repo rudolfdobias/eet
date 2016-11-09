@@ -1,14 +1,13 @@
 ﻿using System.Linq;
 using Mews.Eet.Dto;
 using Mews.Eet.Dto.Identifiers;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Mews.Eet.Tests.IntegrationTests
 {
-    [TestClass]
     public class Basics
     {
-        [TestMethod]
+        [Fact]
         public void SendRevenueSimple()
         {
             var fixture = Fixtures.Second;
@@ -31,13 +30,13 @@ namespace Mews.Eet.Tests.IntegrationTests
             );
             var client = new EetClient(certificate, EetEnvironment.Playground);
             var response = client.SendRevenue(record);
-            Assert.IsNull(response.Error);
-            Assert.IsNotNull(response.Success);
-            Assert.IsNotNull(response.Success.FiscalCode);
-            Assert.IsFalse(response.Warnings.Any());
+            Assert.Null(response.Error);
+            Assert.NotNull(response.Success);
+            Assert.NotNull(response.Success.FiscalCode);
+            Assert.False(response.Warnings.Any());
         }
 
-        [TestMethod]
+        [Fact]
         public void SendRevenue()
         {
             var fixture = Fixtures.Third;
@@ -66,10 +65,10 @@ namespace Mews.Eet.Tests.IntegrationTests
             );
             var client = new EetClient(certificate, EetEnvironment.Playground);
             var response = client.SendRevenue(record);
-            Assert.IsNull(response.Error);
-            Assert.IsNotNull(response.Success);
-            Assert.IsNotNull(response.Success.FiscalCode);
-            Assert.IsFalse(response.Warnings.Any());
+            Assert.Null(response.Error);
+            Assert.NotNull(response.Success);
+            Assert.NotNull(response.Success.FiscalCode);
+            Assert.False(response.Warnings.Any());
         }
     }
 }

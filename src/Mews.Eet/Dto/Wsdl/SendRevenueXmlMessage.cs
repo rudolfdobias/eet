@@ -12,6 +12,6 @@ namespace Mews.Eet.Dto.Wsdl
         public RevenueData Data { get; set; }
 
         [XmlElement(Namespace = "http://fs.mfcr.cz/eet/schema/v3", Order = 2, ElementName = "KontrolniKody")]
-        public RevenueCheckCode CheckCodes { get; set; }
+        public RevenueSecurityCode SecurityCode { get; set; }
     }
 }
