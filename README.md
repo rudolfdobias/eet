@@ -26,6 +26,7 @@ var certificate = new Certificate(
     password: "certificatePassword",
     data: certificateContentsByteArray
 );
+
 var record = new RevenueRecord(
     identification: new Identification(
         taxPayerIdentifier: new TaxIdentifier("CZ1234567890"),
@@ -38,6 +39,7 @@ var record = new RevenueRecord(
     ),
     billNumber: new BillNumber("2016-321")
 );
+
 var client = new EetClient(certificate);
 var response = client.SendRevenue(record);
 if (response.isSuccess())
@@ -45,3 +47,8 @@ if (response.isSuccess())
   var fiscalCode = response.Success.FiscalCode;
 }
 ```
+
+# Authors
+Development: @jirihelmich
+Code review: @siroky, @onashackem
+The time to implement this was kindly provided by Mews Systems.
