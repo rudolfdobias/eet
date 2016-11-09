@@ -44,7 +44,7 @@ var client = new EetClient(certificate);
 var response = client.SendRevenue(record);
 if (response.isSuccess())
 {
-  var fiscalCode = response.Success.FiscalCode;
+    var fiscalCode = response.Success.FiscalCode;
 }
 ```
 
