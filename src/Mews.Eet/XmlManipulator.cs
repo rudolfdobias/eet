@@ -7,10 +7,10 @@ namespace Mews.Eet
 {
     public class XmlManipulator
     {
-        public T Deserialize<T>(XmlElement soapBody)
+        public T Deserialize<T>(XmlElement xmlElement)
             where T : class, new()
         {
-            using (var reader = new StringReader(soapBody.OuterXml))
+            using (var reader = new StringReader(xmlElement.OuterXml))
             {
                 var xmlSerializer = new XmlSerializer(typeof(T));
                 return xmlSerializer.Deserialize(reader) as T;
@@ -18,32 +18,21 @@ namespace Mews.Eet
         }
 
         public XmlElement Serialize<T>(T value)
-            where T : class, new()
+            where T : class
         {
             if (value == null)
             {
                 throw new ArgumentException("Cannot serialize null.");
             }
 
-            try
+            var xmlDocument = new XmlDocument();
+            var navigator = xmlDocument.CreateNavigator();
+            using (var writer = navigator.AppendChild())
             {
-                var xmlDocument = new XmlDocument();
-                var navigator = xmlDocument.CreateNavigator();
-                using (var writer = navigator.AppendChild())
-                {
-                    var namespaces = new XmlSerializerNamespaces();
-
-                    // Add an empty namespace and empty value
-                    namespaces.Add("", "http://fs.mfcr.cz/eet/schema/v3");
-                    var xmlSerializer = new XmlSerializer(typeof(T));
-                    xmlSerializer.Serialize(writer, value, namespaces);
-                }
-                return xmlDocument.DocumentElement;
+                var xmlSerializer = new XmlSerializer(typeof(T));
+                xmlSerializer.Serialize(writer, value);
             }
-            catch (Exception ex)
-            {
-                throw new InvalidOperationException("An error occurred during serialization.", ex);
-            }
+            return xmlDocument.DocumentElement;
         }
     }
 }

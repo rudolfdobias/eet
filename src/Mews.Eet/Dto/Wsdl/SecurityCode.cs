@@ -5,7 +5,7 @@ namespace Mews.Eet.Dto.Wsdl
 {
     [Serializable]
     [XmlType(Namespace = "http://fs.mfcr.cz/eet/schema/v3")]
-    public class SecurityCodeElementType
+    public class SecurityCode
     {
         [XmlAttribute(AttributeName = "digest")]
         public SecurityCodeDigestType Digest { get; set; }

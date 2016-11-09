@@ -7,13 +7,13 @@ namespace Mews.Eet.Communication
 {
     public class SoapHttpClient
     {
-        public SoapHttpClient(string endpointUrl)
+        public SoapHttpClient(Uri endpointUri)
         {
-            EndpointUrl = endpointUrl;
+            EndpointUri = endpointUri;
             HttpClient = new HttpClient();
         }
 
-        private string EndpointUrl { get; }
+        private Uri EndpointUri { get; }
 
         private HttpClient HttpClient { get; }
 
@@ -22,7 +22,7 @@ namespace Mews.Eet.Communication
             HttpClient.DefaultRequestHeaders.Remove("SOAPAction");
             HttpClient.DefaultRequestHeaders.Add("SOAPAction", operation);
             var task = HttpClient.PostAsync(
-                new Uri(EndpointUrl),
+                EndpointUri,
                 new StringContent(body, Encoding.UTF8, "application/x-www-form-urlencoded")
             );
             return task.ContinueWith(t => t.Result.Content.ReadAsStringAsync()).Unwrap();

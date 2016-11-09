@@ -6,9 +6,9 @@ namespace Mews.Eet.Communication
 {
     public class SecurityTokenReference : KeyInfoClause
     {
-        public SecurityTokenReference(string binarySecurityToken)
+        public SecurityTokenReference(string binarySecurityTokenId)
         {
-            BinarySecurityTokenId = binarySecurityToken;
+            BinarySecurityTokenId = binarySecurityTokenId;
         }
 
         private string BinarySecurityTokenId { get; }

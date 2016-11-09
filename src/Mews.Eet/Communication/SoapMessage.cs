@@ -28,7 +28,7 @@ namespace Mews.Eet.Communication
 
         public static SoapMessage FromSoapXml(XmlDocument document)
         {
-            XmlNamespaceManager ns = new XmlNamespaceManager(document.NameTable);
+            var ns = new XmlNamespaceManager(document.NameTable);
             ns.AddNamespace("s", "http://schemas.xmlsoap.org/soap/envelope/");
 
             return new SoapMessage(
@@ -77,7 +77,7 @@ namespace Mews.Eet.Communication
 
         public bool VerifySignature()
         {
-            // TODO
+            // TODO: Signature of the response has to be verified. Note that not every response has the signature.
             return true;
         }
     }

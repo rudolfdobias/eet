@@ -40,27 +40,39 @@ namespace Mews.Eet.Tests.UnitTests
         [TestMethod]
         public void TaxIdWorks()
         {
-            Assert.IsNotNull(new TaxIdentifier("CZ12345678"));
+            AssertDoesNotThrow(() => new TaxIdentifier("CZ12345678"));
         }
 
         [TestMethod]
         public void RegistryIdWorks()
         {
-            Assert.IsNotNull(new RegistryIdentifier("1"));
+            AssertDoesNotThrow(() => new RegistryIdentifier("1"));
         }
 
 
         [TestMethod]
         public void BillNumberWorks()
         {
-            Assert.IsNotNull(new BillNumber("2016020004"));
+            AssertDoesNotThrow(() => new BillNumber("2016020004"));
         }
 
 
         [TestMethod]
         public void PremisesIdWorks()
         {
-            Assert.IsNotNull(new PremisesIdentifier(1));
+            AssertDoesNotThrow(() => new PremisesIdentifier(1));
+        }
+
+        protected void AssertDoesNotThrow(Action test)
+        {
+            try
+            {
+                test();
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail("Expected no exception, but got: " + ex.Message);
+            }
         }
     }
 }

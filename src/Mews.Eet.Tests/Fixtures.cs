@@ -9,7 +9,7 @@ namespace Mews.Eet.Tests
             TaxId = "CZ1212121218",
             PremisesId = 1,
             CertificatePassword = "eet",
-            CertificateData = File.ReadAllBytes("Certificates/Playground/EET_CA1_Playground-CZ1212121218.p12")
+            CertificateData = File.ReadAllBytes("Data/Certificates/Playground/EET_CA1_Playground-CZ1212121218.p12")
         };
 
         public static TaxPayerFixture Second = new TaxPayerFixture
@@ -17,7 +17,7 @@ namespace Mews.Eet.Tests
             TaxId = "CZ00000019",
             PremisesId = 1,
             CertificatePassword = "eet",
-            CertificateData = File.ReadAllBytes("Certificates/Playground/EET_CA1_Playground-CZ00000019.p12")
+            CertificateData = File.ReadAllBytes("Data/Certificates/Playground/EET_CA1_Playground-CZ00000019.p12")
         };
 
         public static TaxPayerFixture Third = new TaxPayerFixture
@@ -25,7 +25,7 @@ namespace Mews.Eet.Tests
             TaxId = "CZ683555118",
             PremisesId = 1,
             CertificatePassword = "eet",
-            CertificateData = File.ReadAllBytes("Certificates/Playground/EET_CA1_Playground-CZ683555118.p12")
+            CertificateData = File.ReadAllBytes("Data/Certificates/Playground/EET_CA1_Playground-CZ683555118.p12")
         };
     }
 

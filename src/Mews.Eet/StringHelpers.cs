@@ -12,7 +12,7 @@ namespace Mews.Eet
     {
         public static bool SafeMatches(string haystack, string pattern)
         {
-            if (String.IsNullOrWhiteSpace(haystack) || String.IsNullOrWhiteSpace(pattern))
+            if (String.IsNullOrEmpty(haystack) || String.IsNullOrWhiteSpace(pattern))
             {
                 return false;
             }

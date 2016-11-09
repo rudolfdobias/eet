@@ -5,7 +5,7 @@ namespace Mews.Eet.Dto.Wsdl
 {
     [SerializableAttribute]
     [XmlType(Namespace = "http://fs.mfcr.cz/eet/schema/v3")]
-    public class SignatureElementType
+    public class Signature
     {
         [XmlAttribute(AttributeName = "digest")]
         public SignatureDigestType Digest { get; set; }

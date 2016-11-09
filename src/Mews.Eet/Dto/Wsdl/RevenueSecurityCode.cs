@@ -5,12 +5,12 @@ namespace Mews.Eet.Dto.Wsdl
 {
     [Serializable]
     [XmlType(Namespace = "http://fs.mfcr.cz/eet/schema/v3")]
-    public class RevenueCheckCode
+    public class RevenueSecurityCode
     {
         [XmlElement(Order = 0, ElementName = "pkp")]
-        public SignatureElementType Signature { get; set; }
+        public Signature Signature { get; set; }
 
         [XmlElement(Order = 1, ElementName = "bkp")]
-        public SecurityCodeElementType SecurityCode { get; set; }
+        public SecurityCode SecurityCode { get; set; }
     }
 }
