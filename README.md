@@ -49,8 +49,8 @@ if (response.isSuccess())
 ```
 
 # Authors
-Development: @jirihelmich
+Development: [@jirihelmich](https://github.com/jirihelmich)
 
-Code review: @siroky, @onashackem
+Code review: [@siroky](https://github.com/siroky), [@onashackem](https://github.com/onashackem)
 
-The time to implement this was kindly provided by Mews Systems.
+The time to implement this was kindly provided by [Mews Systems](http://mewssystems.com).
