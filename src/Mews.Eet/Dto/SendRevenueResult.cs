@@ -48,7 +48,17 @@ namespace Mews.Eet.Dto
 
         public string SecurityCode { get; }
 
+        public bool IsSuccess
+        {
+            get { return Success != null; }
+        }
+
         public SendRevenueSuccess Success { get; }
+
+        public bool IsError
+        {
+            get { return Error != null; }
+        }
 
         public SendRevenueError Error { get; }
 
