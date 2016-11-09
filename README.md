@@ -50,5 +50,7 @@ if (response.isSuccess())
 
 # Authors
 Development: @jirihelmich
+
 Code review: @siroky, @onashackem
+
 The time to implement this was kindly provided by Mews Systems.
