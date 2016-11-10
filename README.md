@@ -2,10 +2,10 @@
 
 # EET
 EET stands for Elektronická Evidence Tržeb, which is Czech version of Fiscal Printers.
-It's an online API provided by the Ministry of Finance in a form of SOAP Web Service.
+It's an online API provided by the Ministry of Finance in a form of a SOAP Web Service.
 
 ## Key features
-- No czech abbreviations.
+- No Czech abbreviations.
 - Early data validation.
 - Intuitive immutable DTOs.
 
