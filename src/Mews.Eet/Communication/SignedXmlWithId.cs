@@ -10,11 +10,6 @@ namespace Mews.Eet.Communication
         {
         }
 
-        public SignedXmlWithId(XmlElement xmlElement)
-            : base(xmlElement)
-        {
-        }
-
         public override XmlElement GetIdElement(XmlDocument xmlDocument, string id)
         {
             var standardIdReferenceElement = base.GetIdElement(xmlDocument, id);

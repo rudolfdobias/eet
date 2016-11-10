@@ -20,11 +20,6 @@ namespace Mews.Eet
         public XmlElement Serialize<T>(T value)
             where T : class
         {
-            if (value == null)
-            {
-                throw new ArgumentException("Cannot serialize null.");
-            }
-
             var xmlDocument = new XmlDocument();
             var navigator = xmlDocument.CreateNavigator();
             using (var writer = navigator.AppendChild())

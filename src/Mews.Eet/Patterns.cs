@@ -12,11 +12,6 @@
             get { return "^[0-9a-zA-Z.,:;/#-_]{1,20}$"; }
         }
 
-        public static string SecurityCode
-        {
-            get { return "^([0-9a-fA-F]{8}-){4}[0-9a-fA-F]{8}$"; }
-        }
-
         public static string TaxIdentifier
         {
             get { return "^CZ[0-9]{8,10}$"; }
