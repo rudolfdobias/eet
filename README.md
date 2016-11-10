@@ -39,7 +39,7 @@ var record = new RevenueRecord(
 );
 
 var client = new EetClient(certificate);
-var response = client.SendRevenue(record);
+var response = await client.SendRevenue(record);
 if (response.IsSuccess)
 {
     var fiscalCode = response.Success.FiscalCode;
@@ -50,5 +50,8 @@ if (response.IsSuccess)
 Development: [@jirihelmich](https://github.com/jirihelmich)
 
 Code review: [@siroky](https://github.com/siroky), [@onashackem](https://github.com/onashackem)
+
+# Participants:
+- [@tomasdeml](https://github.com/tomasdeml): [PR#3](https://github.com/MewsSystems/eet/pull/3/files)
 
 The time to implement this was kindly provided by [Mews Systems](http://mewssystems.com).

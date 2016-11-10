@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ namespace Mews.Eet.Communication
         {
             EndpointUri = endpointUri;
             HttpClient = new HttpClient();
+            EnableTls12();
         }
 
         private Uri EndpointUri { get; }
@@ -26,6 +28,11 @@ namespace Mews.Eet.Communication
                 new StringContent(body, Encoding.UTF8, "application/x-www-form-urlencoded")
             );
             return task.ContinueWith(t => t.Result.Content.ReadAsStringAsync()).Unwrap();
+        }
+
+        private static void EnableTls12()
+        {
+            ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12;
         }
     }
 }
