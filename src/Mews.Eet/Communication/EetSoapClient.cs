@@ -21,7 +21,7 @@ namespace Mews.Eet.Communication
 
         public Task<SendRevenueXmlResponse> SendRevenue(SendRevenueXmlMessage message)
         {
-            return SoapClient.Send<SendRevenueXmlMessage, SendRevenueXmlResponse>(message, operation: "http://fs.mfcr.cz/eet/OdeslaniTrzby");
+            return SoapClient.SendAsync<SendRevenueXmlMessage, SendRevenueXmlResponse>(message, operation: "http://fs.mfcr.cz/eet/OdeslaniTrzby");
         }
     }
 }

@@ -19,15 +19,16 @@ namespace Mews.Eet.Communication
 
         private HttpClient HttpClient { get; }
 
-        public Task<string> Send(string body, string operation)
+        public async Task<string> SendAsync(string body, string operation)
         {
             HttpClient.DefaultRequestHeaders.Remove("SOAPAction");
             HttpClient.DefaultRequestHeaders.Add("SOAPAction", operation);
-            var task = HttpClient.PostAsync(
-                EndpointUri,
-                new StringContent(body, Encoding.UTF8, "application/x-www-form-urlencoded")
-            );
-            return task.ContinueWith(t => t.Result.Content.ReadAsStringAsync()).Unwrap();
+
+            var requestContent = new StringContent(body, Encoding.UTF8, "application/x-www-form-urlencoded");
+            using (var response = await HttpClient.PostAsync(EndpointUri, requestContent).ConfigureAwait(continueOnCapturedContext: false))
+            {
+                return await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            }
         }
 
         private static void EnableTls12()

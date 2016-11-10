@@ -24,18 +24,16 @@ namespace Mews.Eet.Communication
 
         private XmlManipulator XmlManipulator { get; }
 
-        public Task<TOut> Send<TIn, TOut>(TIn messageBodyObject, string operation)
+        public async Task<TOut> SendAsync<TIn, TOut>(TIn messageBodyObject, string operation)
             where TIn : class, new()
             where TOut : class, new()
         {
             var messageBodyXmlElement = XmlManipulator.Serialize(messageBodyObject);
             var soapMessage = new SoapMessage(new SoapMessagePart(messageBodyXmlElement));
             var xmlDocument = Certificate == null ? soapMessage.GetXmlDocument() : soapMessage.GetSignedXmlDocument(Certificate, SignAlgorithm);
-            return HttpClient.Send(xmlDocument.OuterXml, operation).ContinueWith(t =>
-            {
-                var soapBody = GetSoapBody(t.Result);
-                return Task.FromResult(XmlManipulator.Deserialize<TOut>(soapBody));
-            }).Unwrap();
+            var response = await HttpClient.SendAsync(xmlDocument.OuterXml, operation).ConfigureAwait(continueOnCapturedContext: false);
+            var soapBody = GetSoapBody(response);
+            return XmlManipulator.Deserialize<TOut>(soapBody);
         }
 
         private XmlElement GetSoapBody(string soapXmlString)
