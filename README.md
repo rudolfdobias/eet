@@ -55,3 +55,6 @@ Code review: [@siroky](https://github.com/siroky), [@onashackem](https://github.
 - [@tomasdeml](https://github.com/tomasdeml): [PR#3](https://github.com/MewsSystems/eet/pull/3/files)
 
 The time to implement this was kindly provided by [Mews Systems](http://mewssystems.com).
+
+# Friendly projects
+- [https://github.com/todvora/eet-client](https://github.com/todvora/eet-client): Java, MIT
