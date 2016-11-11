@@ -7,20 +7,6 @@ namespace Mews.Eet.Dto
 {
     public class SendRevenueResult
     {
-        public SendRevenueResult(Guid id, DateTimeWithTimeZone issued, string securityCode, SendRevenueSuccess success, SendRevenueError error, bool isPlayground, IEnumerable<Fault> warnings)
-        {
-            if ((success == null) == (error == null))
-            {
-                throw new ArgumentException("Either error or success has to be non-null.");
-            }
-
-            Id = id;
-            IsPlayground = isPlayground;
-            Issued = issued;
-            SecurityCode = securityCode;
-            Warnings = warnings ?? Enumerable.Empty<Fault>();
-        }
-
         internal SendRevenueResult(SendRevenueXmlResponse response)
         {
             var confirmation = response.Item as ResponseSuccess;

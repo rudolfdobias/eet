@@ -11,9 +11,6 @@ namespace Mews.Eet.Dto.Identifiers
             {
                 throw new ArgumentException($"The value '{value}' does not match the pattern '{pattern}'");
             }
-            Pattern = pattern;
         }
-
-        protected string Pattern { get; }
     }
 }

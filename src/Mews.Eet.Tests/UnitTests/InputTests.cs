@@ -61,5 +61,13 @@ namespace Mews.Eet.Tests.UnitTests
             var ex = Record.Exception(() => new PremisesIdentifier(1));
             Assert.Null(ex);
         }
+
+
+        [Fact]
+        public void SafeMatchesIsSafe()
+        {
+            var ex = Record.Exception(() => StringHelpers.SafeMatches(null, ""));
+            Assert.Null(ex);
+        }
     }
 }
