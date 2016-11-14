@@ -5,4 +5,4 @@ install:
   - nuget install xunit.runners -Version 1.9.2 -OutputDirectory testrunner
 script:
   - xbuild /p:Configuration=Release src/Mews.Eet.sln
-  - mono ./packages/xunit.runners.*/tools/xunit.console.clr4.exe ./Mews.Eet/bin/Release/Mews.Eet.Tests.dll
+  - mono ./packages/xunit.runners.*/tools/xunit.console.clr4.exe ./Mews.Eet.Tests/bin/Release/Mews.Eet.Tests.dll
