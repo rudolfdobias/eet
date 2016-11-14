@@ -2,7 +2,7 @@ language: csharp
 solution: src/Mews.Eet.sln
 install:
   - nuget restore src/Mews.Eet.sln
-  - nuget install xunit.runners -Version 1.9.2 -OutputDirectory testrunner
+  - nuget install xunit.runners -Version 2.1.0 -OutputDirectory testrunner
 script:
   - xbuild /p:Configuration=Release src/Mews.Eet.sln
-  - mono ./packages/xunit.runners.*/tools/xunit.console.clr4.exe ./Mews.Eet.Tests/bin/Release/Mews.Eet.Tests.dll
+  - mono ./packages/xunit.runners.2.1.0/tools/xunit.console.clr4.exe ./Mews.Eet.Tests/bin/Release/Mews.Eet.Tests.dll
