@@ -2,11 +2,11 @@
 {
     public class SendRevenueError
     {
-        public SendRevenueError(Fault error)
+        public SendRevenueError(Fault reason)
         {
-            Error = error;
+            Reason = reason;
         }
 
-        public Fault Error { get; }
+        public Fault Reason { get; }
     }
 }

@@ -6,7 +6,7 @@ namespace Mews.Eet
 {
     public class EetClient
     {
-        public EetClient(Certificate certificate, EetEnvironment environment = EetEnvironment.Production, ILogger logger = null)
+        public EetClient(Certificate certificate, EetEnvironment environment = EetEnvironment.Production, EetLogger logger = null)
         {
             EetSoapClient = new EetSoapClient(certificate, environment);
             Logger = logger;
@@ -14,7 +14,7 @@ namespace Mews.Eet
 
         private EetSoapClient EetSoapClient { get; }
 
-        private ILogger Logger { get; }
+        private EetLogger Logger { get; }
 
         public async Task<SendRevenueResult> SendRevenueAsync(RevenueRecord record, EetMode mode = EetMode.Operational)
         {
