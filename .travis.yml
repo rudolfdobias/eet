@@ -3,6 +3,3 @@ solution: src/Mews.Eet.sln
 install:
   - nuget restore src/Mews.Eet.sln
   - nuget install xunit.runner.console -Version 2.1.0 -OutputDirectory testrunner
-script:
-  - xbuild /p:Configuration=Release src/Mews.Eet.sln
-  - mono /home/travis/build/MewsSystems/eet/testrunner/xunit.runner.console.2.1.0/tools/xunit.console.exe ./Mews.Eet.Tests/bin/Release/Mews.Eet.Tests.dll
