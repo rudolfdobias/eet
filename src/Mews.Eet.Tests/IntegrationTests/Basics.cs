@@ -71,5 +71,31 @@ namespace Mews.Eet.Tests.IntegrationTests
             Assert.NotNull(response.Success.FiscalCode);
             Assert.False(response.Warnings.Any());
         }
+
+        [Fact]
+        public async Task HandlesError()
+        {
+            var fixture = Fixtures.First;
+            var certificate = new Certificate(
+                password: fixture.CertificatePassword,
+                data: fixture.CertificateData
+            );
+            var record = new RevenueRecord(
+                identification: new Identification(
+                    taxPayerIdentifier: new TaxIdentifier("CZ1234567891"),
+                    registryIdentifier: new RegistryIdentifier("01"),
+                    premisesIdentifier: new PremisesIdentifier(fixture.PremisesId),
+                    certificate: certificate
+                ),
+                revenue: new Revenue(
+                    gross: new CurrencyValue(1234.00m)
+                ),
+                billNumber: new BillNumber("2016-123")
+            );
+            var client = new EetClient(certificate, EetEnvironment.Playground);
+            var response = await client.SendRevenueAsync(record);
+            Assert.NotNull(response.Error);
+            Assert.Equal(response.Error.Reason.Code, 6);
+        }
     }
 }
