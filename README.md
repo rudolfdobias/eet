@@ -48,6 +48,11 @@ if (response.IsSuccess)
 }
 ```
 
+### Verification mode
+```csharp
+var response = await client.SendRevenueAsync(record, EetMode.Verification);
+```
+
 ### Using playground
 ```csharp
 var client = new EetClient(certificate, EetEnvironment.Playground);
