@@ -48,6 +48,11 @@ if (response.IsSuccess)
 }
 ```
 
+### Using playground
+```csharp
+var client = new EetClient(certificate, EetEnvironment.Playground);
+```
+
 # Tests
 Test are not currently running on Travis CI, as their network infrastructure is blocking HTTPS traffic directed into Europe, where the EET servers are located.
 
