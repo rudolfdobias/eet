@@ -27,7 +27,7 @@ namespace Mews.Eet.Communication
             var requestContent = new StringContent(body, Encoding.UTF8, "application/x-www-form-urlencoded");
             using (var response = await HttpClient.PostAsync(EndpointUri, requestContent).ConfigureAwait(continueOnCapturedContext: false))
             {
-                return await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                return await response.Content.ReadAsStringAsync().ConfigureAwait(continueOnCapturedContext: false);
             }
         }
 
