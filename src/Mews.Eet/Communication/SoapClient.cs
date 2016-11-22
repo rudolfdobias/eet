@@ -8,12 +8,13 @@ namespace Mews.Eet.Communication
 {
     public class SoapClient
     {
-        public SoapClient(Uri endpointUri, X509Certificate2 certificate, SignAlgorithm signAlgorithm = SignAlgorithm.Sha256)
+        public SoapClient(Uri endpointUri, X509Certificate2 certificate, SignAlgorithm signAlgorithm = SignAlgorithm.Sha256, EetLogger logger = null)
         {
             HttpClient = new SoapHttpClient(endpointUri);
             Certificate = certificate;
             SignAlgorithm = signAlgorithm;
             XmlManipulator = new XmlManipulator();
+            Logger = logger;
         }
 
         private SoapHttpClient HttpClient { get; }
@@ -24,14 +25,22 @@ namespace Mews.Eet.Communication
 
         private XmlManipulator XmlManipulator { get; }
 
-        public async Task<TOut> SendAsync<TIn, TOut>(TIn messageBodyObject, string operation)
+        private EetLogger Logger { get; }
+
+        public async Task<TOut> SendAsync<TIn, TOut>(TIn messageBodyObject, string operation, TimeSpan httpTimeout)
             where TIn : class, new()
             where TOut : class, new()
         {
             var messageBodyXmlElement = XmlManipulator.Serialize(messageBodyObject);
             var soapMessage = new SoapMessage(new SoapMessagePart(messageBodyXmlElement));
             var xmlDocument = Certificate == null ? soapMessage.GetXmlDocument() : soapMessage.GetSignedXmlDocument(Certificate, SignAlgorithm);
-            var response = await HttpClient.SendAsync(xmlDocument.OuterXml, operation).ConfigureAwait(continueOnCapturedContext: false);
+
+            var xml = xmlDocument.OuterXml;
+            Logger?.Debug($"Ready to send Signed XML to EET servers.", xml);
+
+            var response = await HttpClient.SendAsync(xml, operation, httpTimeout).ConfigureAwait(continueOnCapturedContext: false);
+            Logger?.Debug($"Received response from EET servers.", response);
+
             var soapBody = GetSoapBody(response);
             return XmlManipulator.Deserialize<TOut>(soapBody);
         }

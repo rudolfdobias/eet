@@ -19,10 +19,11 @@ namespace Mews.Eet.Communication
 
         private HttpClient HttpClient { get; }
 
-        public async Task<string> SendAsync(string body, string operation)
+        public async Task<string> SendAsync(string body, string operation, TimeSpan timeout)
         {
             HttpClient.DefaultRequestHeaders.Remove("SOAPAction");
             HttpClient.DefaultRequestHeaders.Add("SOAPAction", operation);
+            HttpClient.Timeout = timeout;
 
             var requestContent = new StringContent(body, Encoding.UTF8, "application/x-www-form-urlencoded");
             using (var response = await HttpClient.PostAsync(EndpointUri, requestContent).ConfigureAwait(continueOnCapturedContext: false))
