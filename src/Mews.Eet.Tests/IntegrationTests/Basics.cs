@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Mews.Eet.Dto;
 using Mews.Eet.Dto.Identifiers;
+using Newtonsoft.Json;
 using Xunit;
 
 namespace Mews.Eet.Tests.IntegrationTests
@@ -12,24 +13,8 @@ namespace Mews.Eet.Tests.IntegrationTests
         [Fact]
         public async Task SendRevenueSimple()
         {
-            var fixture = Fixtures.Second;
-
-            var certificate = new Certificate(
-                password: fixture.CertificatePassword,
-                data: fixture.CertificateData
-            );
-            var record = new RevenueRecord(
-                identification: new Identification(
-                    taxPayerIdentifier: new TaxIdentifier(fixture.TaxId),
-                    registryIdentifier: new RegistryIdentifier("01"),
-                    premisesIdentifier: new PremisesIdentifier(fixture.PremisesId),
-                    certificate: certificate
-                ),
-                revenue: new Revenue(
-                    gross: new CurrencyValue(1234.00m)
-                ),
-                billNumber: new BillNumber("2016-123")
-            );
+            var certificate = CreateCertificate(Fixtures.Second);
+            var record = CreateSimpleRecord(certificate, Fixtures.Second);
             var client = new EetClient(certificate, EetEnvironment.Playground);
             var response = await client.SendRevenueAsync(record);
             Assert.Null(response.Error);
@@ -41,24 +26,9 @@ namespace Mews.Eet.Tests.IntegrationTests
         [Fact]
         public async Task TimeoutWorks()
         {
-            var fixture = Fixtures.Second;
 
-            var certificate = new Certificate(
-                password: fixture.CertificatePassword,
-                data: fixture.CertificateData
-            );
-            var record = new RevenueRecord(
-                identification: new Identification(
-                    taxPayerIdentifier: new TaxIdentifier(fixture.TaxId),
-                    registryIdentifier: new RegistryIdentifier("01"),
-                    premisesIdentifier: new PremisesIdentifier(fixture.PremisesId),
-                    certificate: certificate
-                ),
-                revenue: new Revenue(
-                    gross: new CurrencyValue(1234.00m)
-                ),
-                billNumber: new BillNumber("2016-123")
-            );
+            var certificate = CreateCertificate(Fixtures.Second);
+            var record = CreateSimpleRecord(certificate, Fixtures.Second);
             var client = new EetClient(certificate, EetEnvironment.Playground);
             await Assert.ThrowsAsync<TaskCanceledException>(async () => await client.SendRevenueAsync(record, httpTimeout: TimeSpan.FromMilliseconds(1)));
         }
@@ -101,16 +71,12 @@ namespace Mews.Eet.Tests.IntegrationTests
         [Fact]
         public async Task HandlesError()
         {
-            var fixture = Fixtures.First;
-            var certificate = new Certificate(
-                password: fixture.CertificatePassword,
-                data: fixture.CertificateData
-            );
-            var record = new RevenueRecord(
-                identification: new Identification(
-                    taxPayerIdentifier: new TaxIdentifier("CZ1234567891"),
+            var certificate = CreateCertificate(Fixtures.First);
+            var record =  new RevenueRecord(
+                    identification: new Identification(
+                    taxPayerIdentifier: new TaxIdentifier("CZ111444789"),
                     registryIdentifier: new RegistryIdentifier("01"),
-                    premisesIdentifier: new PremisesIdentifier(fixture.PremisesId),
+                    premisesIdentifier: new PremisesIdentifier(Fixtures.First.PremisesId),
                     certificate: certificate
                 ),
                 revenue: new Revenue(
@@ -122,6 +88,40 @@ namespace Mews.Eet.Tests.IntegrationTests
             var response = await client.SendRevenueAsync(record);
             Assert.NotNull(response.Error);
             Assert.Equal(response.Error.Reason.Code, 6);
+        }
+
+        [Fact]
+        public async void LoggingIsSerializable()
+        {
+            var certificate = CreateCertificate(Fixtures.First);
+            var record = CreateSimpleRecord(certificate, Fixtures.First);
+            var client = new EetClient(certificate, EetEnvironment.Playground, new EetLogger((m, d) => JsonConvert.SerializeObject(d)));
+            var ex = await Record.ExceptionAsync(async () => await client.SendRevenueAsync(record));
+            Assert.Null(ex);
+        }
+
+        private Certificate CreateCertificate(TaxPayerFixture fixture)
+        {
+            return new Certificate(
+                password: fixture.CertificatePassword,
+                data: fixture.CertificateData
+            );
+        }
+
+        private RevenueRecord CreateSimpleRecord(Certificate certificate, TaxPayerFixture fixture)
+        {
+            return new RevenueRecord(
+                identification: new Identification(
+                    taxPayerIdentifier: new TaxIdentifier(fixture.TaxId),
+                    registryIdentifier: new RegistryIdentifier("01"),
+                    premisesIdentifier: new PremisesIdentifier(fixture.PremisesId),
+                    certificate: certificate
+                ),
+                revenue: new Revenue(
+                    gross: new CurrencyValue(1234.00m)
+                ),
+                billNumber: new BillNumber("2016-123")
+            );
         }
     }
 }
