@@ -69,5 +69,14 @@ namespace Mews.Eet.Tests.UnitTests
             var ex = Record.Exception(() => StringHelpers.SafeMatches(null, ""));
             Assert.Null(ex);
         }
+
+        [Fact]
+        public void IdentifierToStringWorks()
+        {
+            var number = "1234";
+            var id = new BillNumber(number);
+            var str = id.ToString();
+            Assert.Equal(number, str);
+        }
     }
 }

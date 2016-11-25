@@ -21,7 +21,7 @@ namespace Mews.Eet
         {
             var effectiveTimeout = httpTimeout ?? TimeSpan.FromSeconds(2);
 
-            Logger?.Info($"Sending record bill '{record.BillNumber}' to EET servers in {mode} mode.", record.Identifier);
+            Logger?.Info($"Sending record bill '{record.BillNumber}' to EET servers in {mode} mode.", "Record identifier: " + record.Identifier);
 
             var xmlMessage = new SendRevenueMessage(record, mode).GetXmlMessage();
             Logger?.Debug($"DTOs for XML message were created.", xmlMessage);
@@ -33,7 +33,7 @@ namespace Mews.Eet
 
             if (result.IsError)
             {
-                Logger?.Info($"Got error response from EET servers for bill {record.BillNumber}.", result);
+                Logger?.Info($"Got error response from EET servers for bill '{record.BillNumber}'.", result);
             }
             else
             {
