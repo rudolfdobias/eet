@@ -85,3 +85,6 @@ The time to implement this was kindly provided by [Mews Systems](http://mewssyst
 
 # Friendly projects
 - [https://github.com/todvora/eet-client](https://github.com/todvora/eet-client): Java, MIT
+
+# Credits
+- [Komodosoft](http://www.komodosoft.net) For publishing [the post](http://www.komodosoft.net/post/2016/03/24/sign-a-soap-message-using-x-509-certificate.aspx) about signing a SOAP message without using WCF.
