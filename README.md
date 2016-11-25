@@ -83,8 +83,9 @@ Code review: [@siroky](https://github.com/siroky), [@onashackem](https://github.
 
 The time to implement this was kindly provided by [Mews Systems](http://mewssystems.com).
 
-# Friendly projects
+# Related projects
 - [https://github.com/todvora/eet-client](https://github.com/todvora/eet-client): Java, MIT
+- [http://hlidaceet.cz/](http://hlidaceet.cz/): A project that uses our library to monitor the EET endpoint.
 
 # Credits
 - [Komodosoft](http://www.komodosoft.net) For publishing [the post](http://www.komodosoft.net/post/2016/03/24/sign-a-soap-message-using-x-509-certificate.aspx) about signing a SOAP message without using WCF.
