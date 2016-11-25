@@ -29,8 +29,8 @@ namespace Mews.Eet.Tests.IntegrationTests
 
             var certificate = CreateCertificate(Fixtures.Second);
             var record = CreateSimpleRecord(certificate, Fixtures.Second);
-            var client = new EetClient(certificate, EetEnvironment.Playground);
-            await Assert.ThrowsAsync<TaskCanceledException>(async () => await client.SendRevenueAsync(record, httpTimeout: TimeSpan.FromMilliseconds(1)));
+            var client = new EetClient(certificate, EetEnvironment.Playground, TimeSpan.FromMilliseconds(1));
+            await Assert.ThrowsAsync<TaskCanceledException>(async () => await client.SendRevenueAsync(record));
         }
 
         [Fact]
@@ -95,7 +95,7 @@ namespace Mews.Eet.Tests.IntegrationTests
         {
             var certificate = CreateCertificate(Fixtures.First);
             var record = CreateSimpleRecord(certificate, Fixtures.First);
-            var client = new EetClient(certificate, EetEnvironment.Playground, new EetLogger((m, d) => JsonConvert.SerializeObject(d)));
+            var client = new EetClient(certificate, EetEnvironment.Playground, httpTimeout: null, logger: new EetLogger((m, d) => JsonConvert.SerializeObject(d)));
             var ex = await Record.ExceptionAsync(async () => await client.SendRevenueAsync(record));
             Assert.Null(ex);
         }
@@ -105,7 +105,7 @@ namespace Mews.Eet.Tests.IntegrationTests
         {
             var certificate = CreateCertificate(Fixtures.First);
             var record = CreateSimpleRecord(certificate, Fixtures.First);
-            var client = new EetClient(certificate, EetEnvironment.Playground, new EetLogger((m, d) => JsonConvert.SerializeObject(d)));
+            var client = new EetClient(certificate, EetEnvironment.Playground, httpTimeout: null, logger: new EetLogger((m, d) => JsonConvert.SerializeObject(d)));
 
             var tasks = Enumerable.Range(0, 50).Select(i => client.SendRevenueAsync(record));
             var ex = await Record.ExceptionAsync(async () => await Task.WhenAll(tasks).ConfigureAwait(continueOnCapturedContext: false));

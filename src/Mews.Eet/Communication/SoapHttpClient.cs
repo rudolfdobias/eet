@@ -8,26 +8,25 @@ namespace Mews.Eet.Communication
 {
     public class SoapHttpClient
     {
-        public SoapHttpClient(Uri endpointUri)
+        public SoapHttpClient(Uri endpointUri, TimeSpan timeout)
         {
             EndpointUri = endpointUri;
+            HttpClient = new HttpClient() { Timeout = timeout };
             EnableTls12();
         }
 
         private Uri EndpointUri { get; }
 
-        public async Task<string> SendAsync(string body, string operation, TimeSpan timeout)
-        {
-            using (var httpClient = new HttpClient())
-            {
-                httpClient.DefaultRequestHeaders.Add("SOAPAction", operation);
-                httpClient.Timeout = timeout;
+        private HttpClient HttpClient { get; }
 
-                var requestContent = new StringContent(body, Encoding.UTF8, "application/x-www-form-urlencoded");
-                using (var response = await httpClient.PostAsync(EndpointUri, requestContent).ConfigureAwait(continueOnCapturedContext: false))
-                {
-                    return await response.Content.ReadAsStringAsync().ConfigureAwait(continueOnCapturedContext: false);
-                }
+        public async Task<string> SendAsync(string body, string operation)
+        {
+            HttpClient.DefaultRequestHeaders.Add("SOAPAction", operation);
+
+            var requestContent = new StringContent(body, Encoding.UTF8, "application/x-www-form-urlencoded");
+            using (var response = await HttpClient.PostAsync(EndpointUri, requestContent).ConfigureAwait(continueOnCapturedContext: false))
+            {
+                return await response.Content.ReadAsStringAsync().ConfigureAwait(continueOnCapturedContext: false);
             }
         }
 

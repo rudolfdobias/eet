@@ -7,9 +7,10 @@ namespace Mews.Eet
 {
     public class EetClient
     {
-        public EetClient(Certificate certificate, EetEnvironment environment = EetEnvironment.Production, EetLogger logger = null)
+        public EetClient(Certificate certificate, EetEnvironment environment = EetEnvironment.Production, TimeSpan? httpTimeout = null, EetLogger logger = null)
         {
-            EetSoapClient = new EetSoapClient(certificate, environment, logger);
+            var effectiveTimeout = httpTimeout ?? TimeSpan.FromSeconds(2);
+            EetSoapClient = new EetSoapClient(certificate, environment, effectiveTimeout, logger);
             Logger = logger;
         }
 
@@ -17,16 +18,14 @@ namespace Mews.Eet
 
         private EetLogger Logger { get; }
 
-        public async Task<SendRevenueResult> SendRevenueAsync(RevenueRecord record, EetMode mode = EetMode.Operational, TimeSpan? httpTimeout = null)
+        public async Task<SendRevenueResult> SendRevenueAsync(RevenueRecord record, EetMode mode = EetMode.Operational)
         {
-            var effectiveTimeout = httpTimeout ?? TimeSpan.FromSeconds(2);
-
             Logger?.Info($"Sending record bill '{record.BillNumber}' to EET servers in {mode} mode.", "Record identifier: " + record.Identifier);
 
             var xmlMessage = new SendRevenueMessage(record, mode).GetXmlMessage();
             Logger?.Debug($"DTOs for XML message were created.", xmlMessage);
 
-            var sendRevenueResult = await EetSoapClient.SendRevenueAsync(xmlMessage, effectiveTimeout).ConfigureAwait(continueOnCapturedContext: false);
+            var sendRevenueResult = await EetSoapClient.SendRevenueAsync(xmlMessage).ConfigureAwait(continueOnCapturedContext: false);
             Logger?.Debug($"Received response from EET servers.", sendRevenueResult);
 
             var result = new SendRevenueResult(sendRevenueResult);
