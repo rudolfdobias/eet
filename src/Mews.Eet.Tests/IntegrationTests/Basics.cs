@@ -100,6 +100,18 @@ namespace Mews.Eet.Tests.IntegrationTests
             Assert.Null(ex);
         }
 
+        [Fact]
+        public async void ParallelRequestsWork()
+        {
+            var certificate = CreateCertificate(Fixtures.First);
+            var record = CreateSimpleRecord(certificate, Fixtures.First);
+            var client = new EetClient(certificate, EetEnvironment.Playground, new EetLogger((m, d) => JsonConvert.SerializeObject(d)));
+
+            var tasks = Enumerable.Range(0, 50).Select(i => client.SendRevenueAsync(record));
+            var ex = await Record.ExceptionAsync(async () => await Task.WhenAll(tasks).ConfigureAwait(continueOnCapturedContext: false));
+            Assert.Null(ex);
+        }
+
         private Certificate CreateCertificate(TaxPayerFixture fixture)
         {
             return new Certificate(
