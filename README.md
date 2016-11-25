@@ -10,6 +10,7 @@ It's an online API provided by the Ministry of Finance in a form of a SOAP Web S
 - Intuitive immutable DTOs.
 - SOAP communication (including WS-Security signing).
 - PKP and BKP security code computation.
+- Support for parallel async requests.
 
 ## Known issues
 - [8](https://github.com/MewsSystems/eet/issues/8): As the communication is done fully via HTTPS, we postponed the implementation of response signature verification. It's a potential security risk that will be addressed in upcoming releases.
