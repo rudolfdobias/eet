@@ -10,7 +10,7 @@ namespace Mews.Eet.Communication
     {
         public SoapClient(Uri endpointUri, X509Certificate2 certificate, TimeSpan httpTimeout, SignAlgorithm signAlgorithm = SignAlgorithm.Sha256, EetLogger logger = null)
         {
-            HttpClient = new SoapHttpClient(endpointUri, httpTimeout);
+            HttpClient = new SoapHttpClient(endpointUri, httpTimeout, logger);
             Certificate = certificate;
             SignAlgorithm = signAlgorithm;
             XmlManipulator = new XmlManipulator();
@@ -32,14 +32,17 @@ namespace Mews.Eet.Communication
             where TOut : class, new()
         {
             var messageBodyXmlElement = XmlManipulator.Serialize(messageBodyObject);
+            Logger?.Debug($"Created XML document from DTOs.");
+
             var soapMessage = new SoapMessage(new SoapMessagePart(messageBodyXmlElement));
             var xmlDocument = Certificate == null ? soapMessage.GetXmlDocument() : soapMessage.GetSignedXmlDocument(Certificate, SignAlgorithm);
 
             var xml = xmlDocument.OuterXml;
-            Logger?.Debug($"Ready to send Signed XML to EET servers.", xml);
+            Logger?.Debug($"Created signed XML.", xml);
 
             var response = await HttpClient.SendAsync(xml, operation).ConfigureAwait(continueOnCapturedContext: false);
-            Logger?.Debug($"Received response from EET servers.", response);
+
+            Logger?.Debug($"Received RAW response from EET servers.", response);
 
             var soapBody = GetSoapBody(response);
             return XmlManipulator.Deserialize<TOut>(soapBody);

@@ -105,11 +105,30 @@ namespace Mews.Eet.Tests.IntegrationTests
         {
             var certificate = CreateCertificate(Fixtures.First);
             var record = CreateSimpleRecord(certificate, Fixtures.First);
-            var client = new EetClient(certificate, EetEnvironment.Playground, httpTimeout: null, logger: new EetLogger((m, d) => JsonConvert.SerializeObject(d)));
+            var client = new EetClient(certificate, EetEnvironment.Playground, httpTimeout: null);
 
             var tasks = Enumerable.Range(0, 50).Select(i => client.SendRevenueAsync(record));
             var ex = await Record.ExceptionAsync(async () => await Task.WhenAll(tasks).ConfigureAwait(continueOnCapturedContext: false));
             Assert.Null(ex);
+        }
+
+        [Fact]
+        public async void TimingMeasurementWorks()
+        {
+            var certificate = CreateCertificate(Fixtures.First);
+            var record = CreateSimpleRecord(certificate, Fixtures.First);
+
+            var logger = new EetLogger((message, detailObject) =>
+            {
+                if (message.StartsWith("HTTP request finished"))
+                {
+                    var duration = (long)detailObject;
+                    Assert.InRange(duration, 0, 10000);
+                }
+            });
+
+            var client = new EetClient(certificate, EetEnvironment.Playground, httpTimeout: null, logger: logger);
+            await client.SendRevenueAsync(record);
         }
 
         private Certificate CreateCertificate(TaxPayerFixture fixture)

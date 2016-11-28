@@ -20,13 +20,13 @@ namespace Mews.Eet
 
         public async Task<SendRevenueResult> SendRevenueAsync(RevenueRecord record, EetMode mode = EetMode.Operational)
         {
-            Logger?.Info($"Sending record bill '{record.BillNumber}' to EET servers in {mode} mode.", "Record identifier: " + record.Identifier);
+            Logger?.Info($"Sending revenue record for bill '{record.BillNumber}' to EET servers in {mode} mode.", "Record identifier: " + record.Identifier);
 
             var xmlMessage = new SendRevenueMessage(record, mode).GetXmlMessage();
-            Logger?.Debug($"DTOs for XML message were created.", xmlMessage);
+            Logger?.Debug($"DTOs for XML mapping were created.", xmlMessage);
 
             var sendRevenueResult = await EetSoapClient.SendRevenueAsync(xmlMessage).ConfigureAwait(continueOnCapturedContext: false);
-            Logger?.Debug($"Received response from EET servers.", sendRevenueResult);
+            Logger?.Debug($"Result received and successfully deserialized from XML DTOs.", sendRevenueResult);
 
             var result = new SendRevenueResult(sendRevenueResult);
 
@@ -36,7 +36,7 @@ namespace Mews.Eet
             }
             else
             {
-                Logger?.Info($"Got success response from EET servers for bill {record.BillNumber}.", result);
+                Logger?.Info($"Got success response from EET servers for bill '{record.BillNumber}'. FIK: '{result.Success.FiscalCode}'.", result);
             }
 
             return result;

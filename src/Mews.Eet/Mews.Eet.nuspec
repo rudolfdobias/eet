@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Mews.Eet</id>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <title>$title$</title>
     <authors>Jiří Helmich</authors>
     <owners>Mews Systems</owners>
@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/MewsSystems/eet</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Client for EET - Czech fiscal machines.</description>
-    <releaseNotes>First nuget version.</releaseNotes>
+    <releaseNotes>Logging improvements.</releaseNotes>
     <copyright>Copyright 2016</copyright>
     <tags>EET Fiscal</tags>
   </metadata>
