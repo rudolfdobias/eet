@@ -85,8 +85,8 @@ Code review: [@siroky](https://github.com/siroky), [@onashackem](https://github.
 The time to implement this was kindly provided by [Mews Systems](http://mewssystems.com).
 
 # Related projects
-- [https://github.com/todvora/eet-client](eet-client) by [https://github.com/todvora](@todvora): Java, MIT
-- [https://github.com/charlieMonroe/SwiftEET](SwiftEET) by [https://github.com/charlieMonroe](@charlieMonroe): Swift, GPL-3.0
+- [eet-client](https://github.com/todvora/eet-client) by [@todvora](https://github.com/@todvora): Java, MIT
+- [SwiftEET](https://github.com/charlieMonroe/SwiftEET) by [@charlieMonroe](https://github.com/charlieMonroe): Swift, GPL-3.0
 - [http://hlidaceet.cz/](http://hlidaceet.cz/): A project that uses our library to monitor the EET endpoint.
 
 # Credits
