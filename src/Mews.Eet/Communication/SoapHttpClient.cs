@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Mews.Eet.Events;
 
 namespace Mews.Eet.Communication
 {
@@ -17,6 +18,8 @@ namespace Mews.Eet.Communication
             EnableTls12();
         }
 
+        public event EventHandler<HttpRequestFinishedEventArgs> HttpRequestFinished;
+
         private Uri EndpointUri { get; }
 
         private HttpClient HttpClient { get; }
@@ -28,7 +31,7 @@ namespace Mews.Eet.Communication
             HttpClient.DefaultRequestHeaders.Add("SOAPAction", operation);
 
             var requestContent = new StringContent(body, Encoding.UTF8, "application/x-www-form-urlencoded");
-            Logger?.Debug("Starting HTTP request.", body);
+            Logger?.Debug("Starting HTTP request.", new { HttpRequestBody = body });
 
             var stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -38,7 +41,9 @@ namespace Mews.Eet.Communication
                 var result = await response.Content.ReadAsStringAsync().ConfigureAwait(continueOnCapturedContext: false);
 
                 stopwatch.Stop();
-                Logger?.Info($"HTTP request finished in {stopwatch.ElapsedMilliseconds}ms.", stopwatch.ElapsedMilliseconds);
+                var duration = stopwatch.ElapsedMilliseconds;
+                Logger?.Info($"HTTP request finished in {stopwatch.ElapsedMilliseconds}ms.", new { HttpRequestDuration = duration });
+                HttpRequestFinished?.Invoke(this, new HttpRequestFinishedEventArgs(duration));
 
                 return result;
             }

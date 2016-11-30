@@ -92,6 +92,8 @@
     <Compile Include="DateTimeProvider.cs" />
     <Compile Include="EetEnvironment.cs" />
     <Compile Include="EetMode.cs" />
+    <Compile Include="Events\XmlMessageSerializedEventArgs.cs" />
+    <Compile Include="Events\HttpRequestFinishedEventArgs.cs" />
     <Compile Include="Extensions\CurrencyValueExtensions.cs" />
     <Compile Include="Extensions\TaxRateItemsExtensions.cs" />
     <Compile Include="Communication\SendRevenueMessage.cs" />

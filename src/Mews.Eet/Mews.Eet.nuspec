@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Mews.Eet</id>
-    <version>1.0.1</version>
+    <version>1.1.0</version>
     <title>$title$</title>
     <authors>Jiří Helmich</authors>
     <owners>Mews Systems</owners>
@@ -10,7 +10,11 @@
     <projectUrl>https://github.com/MewsSystems/eet</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Client for EET - Czech fiscal machines.</description>
-    <releaseNotes>Logging improvements.</releaseNotes>
+    <releaseNotes>
+      Logging improvements - every detail is now an object.
+      More specifically, if you serialize it into JSON, you get a JSON object.
+      Also, we have added two events so that you can learn how long was the HTTP request running and access the body of the SOAP message once it is assembled.
+    </releaseNotes>
     <copyright>Copyright 2016</copyright>
     <tags>EET Fiscal</tags>
   </metadata>

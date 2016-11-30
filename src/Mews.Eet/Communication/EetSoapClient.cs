@@ -3,6 +3,7 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Mews.Eet.Dto;
 using Mews.Eet.Dto.Wsdl;
+using Mews.Eet.Events;
 
 namespace Mews.Eet.Communication
 {
@@ -20,7 +21,13 @@ namespace Mews.Eet.Communication
             var endpointUri = new Uri($"https://{subdomain}.eet.cz:443/eet/services/EETServiceSOAP/v3");
             SoapClient = new SoapClient(endpointUri, certificate.X509Certificate2, httpTimeout, SignAlgorithm.Sha256, logger);
             Logger = logger;
+            SoapClient.HttpRequestFinished += (sender, args) => HttpRequestFinished?.Invoke(this, args);
+            SoapClient.XmlMessageSerialized += (sender, args) => XmlMessageSerialized?.Invoke(this, args);
         }
+
+        public event EventHandler<HttpRequestFinishedEventArgs> HttpRequestFinished;
+
+        public event EventHandler<XmlMessageSerializedEventArgs> XmlMessageSerialized;
 
         public EetEnvironment Environment { get; }
 

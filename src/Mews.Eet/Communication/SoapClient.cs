@@ -3,6 +3,7 @@ using System.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using System.Xml;
+using Mews.Eet.Events;
 
 namespace Mews.Eet.Communication
 {
@@ -15,7 +16,12 @@ namespace Mews.Eet.Communication
             SignAlgorithm = signAlgorithm;
             XmlManipulator = new XmlManipulator();
             Logger = logger;
+            HttpClient.HttpRequestFinished += (sender, args) => HttpRequestFinished?.Invoke(this, args);
         }
+
+        public event EventHandler<HttpRequestFinishedEventArgs> HttpRequestFinished;
+
+        public event EventHandler<XmlMessageSerializedEventArgs> XmlMessageSerialized;
 
         private SoapHttpClient HttpClient { get; }
 
@@ -32,17 +38,19 @@ namespace Mews.Eet.Communication
             where TOut : class, new()
         {
             var messageBodyXmlElement = XmlManipulator.Serialize(messageBodyObject);
-            Logger?.Debug($"Created XML document from DTOs.");
+            var mesasgeBodyXmlString = messageBodyXmlElement.OuterXml;
+            Logger?.Debug("Created XML document from DTOs.", new { XmlString = mesasgeBodyXmlString });
+            XmlMessageSerialized?.Invoke(this, new XmlMessageSerializedEventArgs(messageBodyXmlElement));
 
             var soapMessage = new SoapMessage(new SoapMessagePart(messageBodyXmlElement));
             var xmlDocument = Certificate == null ? soapMessage.GetXmlDocument() : soapMessage.GetSignedXmlDocument(Certificate, SignAlgorithm);
 
             var xml = xmlDocument.OuterXml;
-            Logger?.Debug($"Created signed XML.", xml);
+            Logger?.Debug("Created signed XML.", new { SoapString = xml });
 
             var response = await HttpClient.SendAsync(xml, operation).ConfigureAwait(continueOnCapturedContext: false);
 
-            Logger?.Debug($"Received RAW response from EET servers.", response);
+            Logger?.Debug("Received RAW response from EET servers.", new { HttpResponseBody = response });
 
             var soapBody = GetSoapBody(response);
             return XmlManipulator.Deserialize<TOut>(soapBody);

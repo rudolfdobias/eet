@@ -95,7 +95,16 @@ namespace Mews.Eet.Tests.IntegrationTests
         {
             var certificate = CreateCertificate(Fixtures.First);
             var record = CreateSimpleRecord(certificate, Fixtures.First);
-            var client = new EetClient(certificate, EetEnvironment.Playground, httpTimeout: null, logger: new EetLogger((m, d) => JsonConvert.SerializeObject(d)));
+            var client = new EetClient(
+                certificate,
+                EetEnvironment.Playground,
+                httpTimeout: null,
+                logger: new EetLogger((m, d) =>
+                {
+                    var jsonString = JsonConvert.SerializeObject(d);
+                    Assert.True(jsonString.StartsWith("{"));
+                })
+            );
             var ex = await Record.ExceptionAsync(async () => await client.SendRevenueAsync(record));
             Assert.Null(ex);
         }
@@ -117,17 +126,25 @@ namespace Mews.Eet.Tests.IntegrationTests
         {
             var certificate = CreateCertificate(Fixtures.First);
             var record = CreateSimpleRecord(certificate, Fixtures.First);
-
-            var logger = new EetLogger((message, detailObject) =>
+            var client = new EetClient(certificate, EetEnvironment.Playground, httpTimeout: null);
+            client.HttpRequestFinished += (sender, args) =>
             {
-                if (message.StartsWith("HTTP request finished"))
-                {
-                    var duration = (long)detailObject;
-                    Assert.InRange(duration, 0, 10000);
-                }
-            });
+                var duration = args.Duration;
+                Assert.InRange(duration, 0, 10000);
+            };
+            await client.SendRevenueAsync(record);
+        }
 
-            var client = new EetClient(certificate, EetEnvironment.Playground, httpTimeout: null, logger: logger);
+        [Fact]
+        public async void XmlExtractionWorks()
+        {
+            var certificate = CreateCertificate(Fixtures.First);
+            var record = CreateSimpleRecord(certificate, Fixtures.First);
+            var client = new EetClient(certificate, EetEnvironment.Playground, httpTimeout: null);
+            client.XmlMessageSerialized += (sender, args) =>
+            {
+                Assert.NotNull(args.XmlElement);
+            };
             await client.SendRevenueAsync(record);
         }
 
