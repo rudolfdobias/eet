@@ -11,6 +11,7 @@ It's an online API provided by the Ministry of Finance in a form of a SOAP Web S
 - SOAP communication (including WS-Security signing).
 - PKP and BKP security code computation.
 - Support for parallel async requests.
+- Logging support
 
 ## Known issues
 - [8](https://github.com/MewsSystems/eet/issues/8): As the communication is done fully via HTTPS, we postponed the implementation of response signature verification. It's a potential security risk that will be addressed in upcoming releases.
@@ -57,6 +58,46 @@ var response = await client.SendRevenueAsync(record, EetMode.Verification);
 ### Using playground
 ```csharp
 var client = new EetClient(certificate, EetEnvironment.Playground);
+```
+
+### Logging
+- Catchall logger:
+```csharp
+var client = new EetClient(
+    certificate,
+    logger: new EetLogger((message, detailsObject) =>
+    {
+        ...
+    })
+);
+```
+
+- Selective logger:
+```csharp
+var logHandler = (message, detailsObject) => { ... };
+var client = new EetClient(
+    certificate,
+    logger: new EetLogger(onError: logHandler, onInfo: logHandler, onDebug: null)
+);
+```
+
+### Events
+- HTTP request duration
+```csharp
+var client = new EetClient(certificate);
+client.HttpRequestFinished += (sender, args) =>
+{
+    var duration = args.Duration;
+};
+```
+
+- Catching XML message sent to EET
+```csharp
+var client = new EetClient(certificate);
+client.XmlMessageSerialized += (sender, args) =>
+{
+    var xmlString = args.XmlElement.OuterXml;
+};
 ```
 
 # Tests
