@@ -63,12 +63,10 @@ var client = new EetClient(certificate, EetEnvironment.Playground);
 ### Logging
 - Catchall logger:
 ```csharp
+var logHandler = (message, detailsObject) => { ... };
 var client = new EetClient(
     certificate,
-    logger: new EetLogger((message, detailsObject) =>
-    {
-        ...
-    })
+    logger: logHandler
 );
 ```
 
