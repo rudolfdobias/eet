@@ -63,7 +63,7 @@ var client = new EetClient(certificate, EetEnvironment.Playground);
 ### Logging
 - Catchall logger:
 ```csharp
-var logHandler = (message, detailsObject) => { ... };
+Action<string, object> logHandler = (message, detailsObject) => { ... };
 var client = new EetClient(
     certificate,
     logger: logHandler
@@ -72,7 +72,7 @@ var client = new EetClient(
 
 - Selective logger:
 ```csharp
-var logHandler = (message, detailsObject) => { ... };
+Action<string, object> logHandler = (message, detailsObject) => { ... };
 var client = new EetClient(
     certificate,
     logger: new EetLogger(onError: logHandler, onInfo: logHandler, onDebug: null)
