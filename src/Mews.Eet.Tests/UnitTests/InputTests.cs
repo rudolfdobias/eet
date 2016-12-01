@@ -25,6 +25,12 @@ namespace Mews.Eet.Tests.UnitTests
             Assert.Throws<ArgumentException>(() => new BillNumber(Guid.NewGuid().ToString()));
         }
 
+        [Fact]
+        public void BillNumberValidationIsStrict()
+        {
+            Assert.Throws<ArgumentException>(() => new BillNumber("@@@@"));
+        }
+
 
         [Fact]
         public void PremisesIdValidationWorks()

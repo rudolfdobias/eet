@@ -91,7 +91,7 @@ namespace Mews.Eet.Tests.IntegrationTests
         }
 
         [Fact]
-        public async void LoggingIsSerializable()
+        public async Task LoggingIsSerializable()
         {
             var certificate = CreateCertificate(Fixtures.First);
             var record = CreateSimpleRecord(certificate, Fixtures.First);
@@ -110,11 +110,11 @@ namespace Mews.Eet.Tests.IntegrationTests
         }
 
         [Fact]
-        public async void ParallelRequestsWork()
+        public async Task ParallelRequestsWork()
         {
             var certificate = CreateCertificate(Fixtures.First);
             var record = CreateSimpleRecord(certificate, Fixtures.First);
-            var client = new EetClient(certificate, EetEnvironment.Playground, httpTimeout: null);
+            var client = new EetClient(certificate, EetEnvironment.Playground);
 
             var tasks = Enumerable.Range(0, 50).Select(i => client.SendRevenueAsync(record));
             var ex = await Record.ExceptionAsync(async () => await Task.WhenAll(tasks).ConfigureAwait(continueOnCapturedContext: false));
@@ -122,11 +122,11 @@ namespace Mews.Eet.Tests.IntegrationTests
         }
 
         [Fact]
-        public async void TimingMeasurementWorks()
+        public async Task TimingMeasurementWorks()
         {
             var certificate = CreateCertificate(Fixtures.First);
             var record = CreateSimpleRecord(certificate, Fixtures.First);
-            var client = new EetClient(certificate, EetEnvironment.Playground, httpTimeout: null);
+            var client = new EetClient(certificate, EetEnvironment.Playground);
             client.HttpRequestFinished += (sender, args) =>
             {
                 var duration = args.Duration;
@@ -136,11 +136,11 @@ namespace Mews.Eet.Tests.IntegrationTests
         }
 
         [Fact]
-        public async void XmlExtractionWorks()
+        public async Task XmlExtractionWorks()
         {
             var certificate = CreateCertificate(Fixtures.First);
             var record = CreateSimpleRecord(certificate, Fixtures.First);
-            var client = new EetClient(certificate, EetEnvironment.Playground, httpTimeout: null);
+            var client = new EetClient(certificate, EetEnvironment.Playground);
             client.XmlMessageSerialized += (sender, args) =>
             {
                 Assert.NotNull(args.XmlElement);

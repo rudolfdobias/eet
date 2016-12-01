@@ -4,12 +4,12 @@
     {
         public static string BillNumber
         {
-            get { return "^[0-9a-zA-Z.,:;/#-_ ]{1,25}$"; }
+            get { return "^[0-9a-zA-Z\\.,:;/#\\-_ ]{1,25}$"; }
         }
 
         public static string RegistryIdentifier
         {
-            get { return "^[0-9a-zA-Z.,:;/#-_]{1,20}$"; }
+            get { return "^[0-9a-zA-Z\\.,:;/#\\-_ ]{1,20}$"; }
         }
 
         public static string TaxIdentifier
