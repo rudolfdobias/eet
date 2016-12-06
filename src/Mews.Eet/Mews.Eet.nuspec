@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Mews.Eet</id>
-    <version>1.1.1</version>
+    <version>1.1.2</version>
     <title>$title$</title>
     <authors>Jiří Helmich</authors>
     <owners>Mews Systems</owners>
@@ -11,7 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Client for EET - Czech fiscal machines.</description>
     <releaseNotes>
-      Fixed buggy patterns for bill number and registry identifiers. They were too benevolent.
+      Better handling of .NET regex patterns. Thanks @siroky for implementing this.
     </releaseNotes>
     <copyright>Copyright 2016</copyright>
     <tags>EET Fiscal</tags>
