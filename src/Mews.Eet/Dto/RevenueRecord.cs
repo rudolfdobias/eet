@@ -17,12 +17,6 @@ namespace Mews.Eet.Dto
             Mode = mode;
             Signature = Convert.ToBase64String(GetSignatureBytes());
             SecurityCode = GetSecurityCode();
-
-            //// The generated GUID should comply with UUID v4.0. This is meant to be a sanity check just to make sure the EET specs are correct.
-            if (!StringHelpers.SafeMatches(Identifier.ToString(), Patterns.UUID))
-            {
-                throw new ArgumentException("The generated message UUID does not comply with EET requirements.");
-            }
         }
 
         public Guid Identifier { get; }

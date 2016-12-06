@@ -68,14 +68,6 @@ namespace Mews.Eet.Tests.UnitTests
             Assert.Null(ex);
         }
 
-
-        [Fact]
-        public void SafeMatchesIsSafe()
-        {
-            var ex = Record.Exception(() => StringHelpers.SafeMatches(null, ""));
-            Assert.Null(ex);
-        }
-
         [Fact]
         public void IdentifierToStringWorks()
         {
