@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml;
 using Mews.Eet.Dto;
 using Mews.Eet.Dto.Identifiers;
 using Newtonsoft.Json;
@@ -147,6 +148,61 @@ namespace Mews.Eet.Tests.IntegrationTests
             };
             await client.SendRevenueAsync(record);
         }
+
+        [Fact]
+        public async Task TaxIsSerializedCorrectly()
+        {
+            var fixture = Fixtures.First;
+            var certificate = CreateCertificate(fixture);
+            var record = new RevenueRecord(
+                identification: new Identification(
+                    taxPayerIdentifier: new TaxIdentifier(fixture.TaxId),
+                    registryIdentifier: new RegistryIdentifier("01"),
+                    premisesIdentifier: new PremisesIdentifier(fixture.PremisesId),
+                    certificate: certificate
+                ),
+                revenue: new Revenue(
+                    gross: new CurrencyValue(1234.00m),
+                    lowerReducedTaxRate: new TaxRateItem(
+                        new CurrencyValue(100m),
+                        new CurrencyValue(10m),
+                        null
+                    ),
+                    reducedTaxRate: new TaxRateItem(
+                        new CurrencyValue(200m),
+                        new CurrencyValue(30m),
+                        null
+                    ),
+                    standardTaxRate: new TaxRateItem(
+                        new CurrencyValue(300m),
+                        new CurrencyValue(63m),
+                        null
+                    )
+                ),
+                billNumber: new BillNumber("2016-123")
+            );
+            var client = new EetClient(certificate, EetEnvironment.Playground);
+            client.XmlMessageSerialized += (sender, args) =>
+            {
+                var xmlElement = args.XmlElement;
+                Assert.NotNull(xmlElement);
+
+                var namespaceManager = new XmlNamespaceManager(xmlElement.OwnerDocument.NameTable);
+                namespaceManager.AddNamespace("eet", "http://fs.mfcr.cz/eet/schema/v3");
+                var dataNode = xmlElement.SelectSingleNode("//eet:Data", namespaceManager);
+                var attributes = dataNode.Attributes;
+                Assert.Equal("300.00", attributes["zakl_dan1"].Value);
+                Assert.Equal("200.00", attributes["zakl_dan2"].Value);
+                Assert.Equal("100.00", attributes["zakl_dan3"].Value);
+                Assert.Equal("63.00", attributes["dan1"].Value);
+                Assert.Equal("30.00", attributes["dan2"].Value);
+                Assert.Equal("10.00", attributes["dan3"].Value);
+
+            };
+            await client.SendRevenueAsync(record);
+        }
+
+
 
         private Certificate CreateCertificate(TaxPayerFixture fixture)
         {

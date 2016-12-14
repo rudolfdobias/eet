@@ -2,12 +2,12 @@
 {
     public class Revenue
     {
-        public Revenue(CurrencyValue gross, DateTimeWithTimeZone accepted = null, CurrencyValue notTaxable = null, TaxRateItem lowerTaxRate = null, TaxRateItem reducedTaxRate = null, TaxRateItem standardTaxRate = null, CurrencyValue travelServices = null, CurrencyValue deposit = null, CurrencyValue usedDeposit = null)
+        public Revenue(CurrencyValue gross, DateTimeWithTimeZone accepted = null, CurrencyValue notTaxable = null, TaxRateItem lowerReducedTaxRate = null, TaxRateItem reducedTaxRate = null, TaxRateItem standardTaxRate = null, CurrencyValue travelServices = null, CurrencyValue deposit = null, CurrencyValue usedDeposit = null)
         {
             Accepted = accepted ?? DateTimeProvider.Now;
             Gross = gross;
             NotTaxable = notTaxable;
-            LowerTaxRate = lowerTaxRate;
+            LowerReducedTaxRate = lowerReducedTaxRate;
             ReducedTaxRate = reducedTaxRate;
             StandardTaxRate = standardTaxRate;
             TravelServices = travelServices;
@@ -21,7 +21,7 @@
 
         public CurrencyValue NotTaxable { get; }
 
-        public TaxRateItem LowerTaxRate { get; }
+        public TaxRateItem LowerReducedTaxRate { get; }
 
         public TaxRateItem ReducedTaxRate { get; }
 

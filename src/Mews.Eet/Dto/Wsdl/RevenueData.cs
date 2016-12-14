@@ -33,17 +33,17 @@ namespace Mews.Eet.Dto.Wsdl
         [XmlIgnore]
         public bool NotTaxableNetSpecified { get; set; }
 
-        [XmlAttribute(AttributeName = "zakl_dan1")]
-        public decimal LowerRateNet { get; set; }
+        [XmlAttribute(AttributeName = "zakl_dan3")]
+        public decimal LowerReducedRateNet { get; set; }
 
         [XmlIgnore]
-        public bool LowerRateNetSpecified { get; set; }
+        public bool LowerReducedRateNetSpecified { get; set; }
 
-        [XmlAttribute(AttributeName = "dan1")]
-        public decimal LowerRateTax { get; set; }
+        [XmlAttribute(AttributeName = "dan3")]
+        public decimal LowerReducedRateTax { get; set; }
 
         [XmlIgnore]
-        public bool LowerRateTaxSpecified { get; set; }
+        public bool LowerReducedRateTaxSpecified { get; set; }
 
         [XmlAttribute(AttributeName = "zakl_dan2")]
         public decimal ReducedRateNet { get; set; }
@@ -57,13 +57,13 @@ namespace Mews.Eet.Dto.Wsdl
         [XmlIgnore]
         public bool ReducedRateTaxSpecified { get; set; }
 
-        [XmlAttribute(AttributeName = "zakl_dan3")]
+        [XmlAttribute(AttributeName = "zakl_dan1")]
         public decimal StandartRateNet { get; set; }
 
         [XmlIgnore]
         public bool StandartRateNetSpecified { get; set; }
 
-        [XmlAttribute(AttributeName = "dan3")]
+        [XmlAttribute(AttributeName = "dan1")]
         public decimal StandartRateTax { get; set; }
 
         [XmlIgnore]

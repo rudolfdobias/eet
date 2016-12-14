@@ -55,10 +55,10 @@ namespace Mews.Eet.Communication
                 NotTaxableNetSpecified = revenue.NotTaxable.IsDefined(),
                 NotTaxableNet = revenue.NotTaxable.GetOrDefault(),
 
-                LowerRateNetSpecified = revenue.LowerTaxRate.IsValueDefined(r => r.Net),
-                LowerRateTaxSpecified = revenue.LowerTaxRate.IsValueDefined(r => r.Tax),
-                LowerRateNet = revenue.LowerTaxRate.GetOrDefault(r => r.Net),
-                LowerRateTax = revenue.LowerTaxRate.GetOrDefault(r => r.Tax),
+                LowerReducedRateNetSpecified = revenue.LowerReducedTaxRate.IsValueDefined(r => r.Net),
+                LowerReducedRateTaxSpecified = revenue.LowerReducedTaxRate.IsValueDefined(r => r.Tax),
+                LowerReducedRateNet = revenue.LowerReducedTaxRate.GetOrDefault(r => r.Net),
+                LowerReducedRateTax = revenue.LowerReducedTaxRate.GetOrDefault(r => r.Tax),
 
                 ReducedRateNetSpecified = revenue.ReducedTaxRate.IsValueDefined(r => r.Net),
                 ReducedRateTaxSpecified = revenue.ReducedTaxRate.IsValueDefined(r => r.Tax),
@@ -73,8 +73,8 @@ namespace Mews.Eet.Communication
                 TravelServicesSpecified = revenue.TravelServices.IsDefined(),
                 TravelServices = revenue.TravelServices.GetOrDefault(),
 
-                LowerRateGoodsSpecified = revenue.LowerTaxRate.IsValueDefined(r => r.Goods),
-                LowerRateGoods = revenue.LowerTaxRate.GetOrDefault(r => r.Goods),
+                LowerRateGoodsSpecified = revenue.LowerReducedTaxRate.IsValueDefined(r => r.Goods),
+                LowerRateGoods = revenue.LowerReducedTaxRate.GetOrDefault(r => r.Goods),
 
                 ReducedRateGoodsSpecified = revenue.ReducedTaxRate.IsValueDefined(r => r.Goods),
                 ReducedRateGoods = revenue.ReducedTaxRate.GetOrDefault(r => r.Goods),
