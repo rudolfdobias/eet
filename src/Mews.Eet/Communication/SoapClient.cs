@@ -3,6 +3,7 @@ using System.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using System.Xml;
+using Mews.Eet.Dto.Wsdl;
 using Mews.Eet.Events;
 
 namespace Mews.Eet.Communication
@@ -40,7 +41,7 @@ namespace Mews.Eet.Communication
             var messageBodyXmlElement = XmlManipulator.Serialize(messageBodyObject);
             var mesasgeBodyXmlString = messageBodyXmlElement.OuterXml;
             Logger?.Debug("Created XML document from DTOs.", new { XmlString = mesasgeBodyXmlString });
-            XmlMessageSerialized?.Invoke(this, new XmlMessageSerializedEventArgs(messageBodyXmlElement));
+            XmlMessageSerialized?.Invoke(this, new XmlMessageSerializedEventArgs(messageBodyXmlElement, (messageBodyObject as SendRevenueXmlMessage)?.Data.BillNumber));
 
             var soapMessage = new SoapMessage(new SoapMessagePart(messageBodyXmlElement));
             var xmlDocument = Certificate == null ? soapMessage.GetXmlDocument() : soapMessage.GetSignedXmlDocument(Certificate, SignAlgorithm);
