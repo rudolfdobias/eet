@@ -29,7 +29,7 @@ namespace Mews.Eet.Dto
 
         public string CurrencyIsoCode { get; }
 
-        internal decimal Value { get; }
+        public decimal Value { get; }
 
         private decimal EnsureMinimalPrecision(decimal value, int placesCount)
         {
