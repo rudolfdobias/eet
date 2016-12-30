@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Mews.Eet</id>
-    <version>1.1.5</version>
+    <version>1.1.6</version>
     <title>$title$</title>
     <authors>Jiří Helmich</authors>
     <owners>Mews Systems</owners>
@@ -11,7 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Client for EET - Czech fiscal machines.</description>
     <releaseNotes>
-      Value property of CurrencyValue class is now public so that it can be read retrospectively.
+      Fixed reporting of goods and deposits. Thanks Petr Kozemčák for spotting this.
     </releaseNotes>
     <copyright>Copyright 2016</copyright>
     <tags>EET Fiscal</tags>

@@ -75,11 +75,11 @@ namespace Mews.Eet.Dto.Wsdl
         [XmlIgnore]
         public bool TravelServicesSpecified { get; set; }
 
-        [XmlAttribute(AttributeName = "pouzit_zboz1")]
-        public decimal LowerRateGoods { get; set; }
+        [XmlAttribute(AttributeName = "pouzit_zboz3")]
+        public decimal LowerReducedRateGoods { get; set; }
 
         [XmlIgnore]
-        public bool LowerRateGoodsSpecified { get; set; }
+        public bool LowerReducedRateGoodsSpecified { get; set; }
 
         [XmlAttribute(AttributeName = "pouzit_zboz2")]
         public decimal ReducedRateGoods { get; set; }
@@ -87,11 +87,11 @@ namespace Mews.Eet.Dto.Wsdl
         [XmlIgnore]
         public bool ReducedRateGoodsSpecified { get; set; }
 
-        [XmlAttribute(AttributeName = "pouzit_zboz3")]
-        public decimal StandartRateGoods { get; set; }
+        [XmlAttribute(AttributeName = "pouzit_zboz1")]
+        public decimal StandardRateGoods { get; set; }
 
         [XmlIgnore]
-        public bool StandartRateGoodsSpecified { get; set; }
+        public bool StandardRateGoodsSpecified { get; set; }
 
         [XmlAttribute(AttributeName = "urceno_cerp_zuct")]
         public decimal Deposit { get; set; }

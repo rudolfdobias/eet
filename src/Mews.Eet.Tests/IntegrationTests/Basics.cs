@@ -166,18 +166,20 @@ namespace Mews.Eet.Tests.IntegrationTests
                     lowerReducedTaxRate: new TaxRateItem(
                         new CurrencyValue(100m),
                         new CurrencyValue(10m),
-                        null
+                        new CurrencyValue(11m)
                     ),
                     reducedTaxRate: new TaxRateItem(
                         new CurrencyValue(200m),
                         new CurrencyValue(30m),
-                        null
+                        new CurrencyValue(12m)
                     ),
                     standardTaxRate: new TaxRateItem(
                         new CurrencyValue(300m),
                         new CurrencyValue(63m),
-                        null
-                    )
+                        new CurrencyValue(13m)
+                    ),
+                    deposit: new CurrencyValue(432m),
+                    usedDeposit: new CurrencyValue(543m)
                 ),
                 billNumber: new BillNumber("2016-123")
             );
@@ -197,7 +199,11 @@ namespace Mews.Eet.Tests.IntegrationTests
                 Assert.Equal("63.00", attributes["dan1"].Value);
                 Assert.Equal("30.00", attributes["dan2"].Value);
                 Assert.Equal("10.00", attributes["dan3"].Value);
-
+                Assert.Equal("11.00", attributes["pouzit_zboz3"].Value);
+                Assert.Equal("12.00", attributes["pouzit_zboz2"].Value);
+                Assert.Equal("13.00", attributes["pouzit_zboz1"].Value);
+                Assert.Equal("543.00", attributes["cerp_zuct"].Value);
+                Assert.Equal("432.00", attributes["urceno_cerp_zuct"].Value);
             };
             await client.SendRevenueAsync(record);
         }

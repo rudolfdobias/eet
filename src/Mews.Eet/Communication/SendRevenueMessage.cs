@@ -73,14 +73,20 @@ namespace Mews.Eet.Communication
                 TravelServicesSpecified = revenue.TravelServices.IsDefined(),
                 TravelServices = revenue.TravelServices.GetOrDefault(),
 
-                LowerRateGoodsSpecified = revenue.LowerReducedTaxRate.IsValueDefined(r => r.Goods),
-                LowerRateGoods = revenue.LowerReducedTaxRate.GetOrDefault(r => r.Goods),
+                LowerReducedRateGoodsSpecified = revenue.LowerReducedTaxRate.IsValueDefined(r => r.Goods),
+                LowerReducedRateGoods = revenue.LowerReducedTaxRate.GetOrDefault(r => r.Goods),
 
                 ReducedRateGoodsSpecified = revenue.ReducedTaxRate.IsValueDefined(r => r.Goods),
                 ReducedRateGoods = revenue.ReducedTaxRate.GetOrDefault(r => r.Goods),
 
-                StandartRateGoodsSpecified = revenue.StandardTaxRate.IsValueDefined(r => r.Goods),
-                StandartRateGoods = revenue.StandardTaxRate.GetOrDefault(r => r.Goods)
+                StandardRateGoodsSpecified = revenue.StandardTaxRate.IsValueDefined(r => r.Goods),
+                StandardRateGoods = revenue.StandardTaxRate.GetOrDefault(r => r.Goods),
+
+                DepositSpecified = revenue.Deposit.IsDefined(),
+                Deposit = revenue.Deposit.GetOrDefault(),
+
+                DepositUsedSpecified = revenue.UsedDeposit.IsDefined(),
+                DepositUsed = revenue.UsedDeposit.GetOrDefault()
             };
         }
 
