@@ -115,11 +115,12 @@ src\Mews.Eet> nuget pack .\Mews.Eet.csproj -IncludeReferencedProjects
 
 # Authors
 Development: [@jirihelmich](https://github.com/jirihelmich)
-
 Code review: [@siroky](https://github.com/siroky), [@onashackem](https://github.com/onashackem)
 
-# Participants:
-- [@tomasdeml](https://github.com/tomasdeml): [PR#3](https://github.com/MewsSystems/eet/pull/3/files)
+# Who uses the library in production?
+- [Mews Systems](https://mewssystems.com)
+
+We would like to hear your story and know who users of the lib are. Please, thank us for providing the library by sharing with us, who you are and letting us add you into this list.
 
 The time to implement this was kindly provided by [Mews Systems](http://mewssystems.com).
 
@@ -130,3 +131,4 @@ The time to implement this was kindly provided by [Mews Systems](http://mewssyst
 
 # Credits
 - [Komodosoft](http://www.komodosoft.net) For publishing [the post](http://www.komodosoft.net/post/2016/03/24/sign-a-soap-message-using-x-509-certificate.aspx) about signing a SOAP message without using WCF.
+- [@tomasdeml](https://github.com/tomasdeml): [PR#3](https://github.com/MewsSystems/eet/pull/3/files)
