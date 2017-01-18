@@ -126,7 +126,7 @@ We would like to hear your story and know who users of the lib are. Please, than
 The time to implement this was kindly provided by [Mews Systems](http://mewssystems.com).
 
 # Donate
-There is no need to donate the project, but thanks for considering it! Instead, if you like the project, star it here in GitHub :-)! Thanks!
+There is no need to donate the project, but thanks for considering it! Instead, if you like the project, star it here on GitHub :-)! Thanks!
 
 # Related projects
 - [eet-client](https://github.com/todvora/eet-client) by [@todvora](https://github.com/todvora): Java, MIT
