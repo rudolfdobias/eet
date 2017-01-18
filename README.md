@@ -118,7 +118,8 @@ Development: [@jirihelmich](https://github.com/jirihelmich)
 Code review: [@siroky](https://github.com/siroky), [@onashackem](https://github.com/onashackem)
 
 # Who uses the library in production?
-- [Mews Systems](https://mewssystems.com)
+- [Mews Systems](https://mewssystems.com) - Property Management Solution for the 21st century.
+- [Hlídač EET](https://hlidaceet.cz) - Watchdog of the EET API.
 
 We would like to hear your story and know who users of the lib are. Please, thank us for providing the library by sharing with us, who you are and letting us add you into this list.
 
