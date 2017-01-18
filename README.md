@@ -119,7 +119,7 @@ Code review: [@siroky](https://github.com/siroky), [@onashackem](https://github.
 
 # Who uses the library in production?
 - [Mews Systems](https://mewssystems.com) - Property Management Solution for the 21st century.
-- [Hlídač EET](https://hlidaceet.cz) - Watchdog of the EET API.
+- [Hlídač EET](http://hlidaceet.cz) - Watchdog of the EET API endpoint and related services.
 
 We would like to hear your story and know who users of the lib are. Please, thank us for providing the library by sharing with us, who you are and letting us add you into this list.
 
@@ -128,7 +128,6 @@ The time to implement this was kindly provided by [Mews Systems](http://mewssyst
 # Related projects
 - [eet-client](https://github.com/todvora/eet-client) by [@todvora](https://github.com/todvora): Java, MIT
 - [SwiftEET](https://github.com/charlieMonroe/SwiftEET) by [@charlieMonroe](https://github.com/charlieMonroe): Swift, GPL-3.0
-- [http://hlidaceet.cz/](http://hlidaceet.cz/): A project that uses our library to monitor the EET endpoint.
 
 # Credits
 - [Komodosoft](http://www.komodosoft.net) For publishing [the post](http://www.komodosoft.net/post/2016/03/24/sign-a-soap-message-using-x-509-certificate.aspx) about signing a SOAP message without using WCF.
