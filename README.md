@@ -22,8 +22,6 @@ We want the library to throw an error as soon as possible, i.e. when constructin
 That is why we even introduce wrappers for simple datatypes.
 Various usages are demonstrated in our test cases.
 
-Some of the data items are explained [here](doc/data.md).
-
 ### Simplest usage example
 ```csharp
 var certificate = new Certificate(
@@ -52,7 +50,8 @@ if (response.IsSuccess)
 }
 ```
 
-More examples are presented [here](doc/examples.md).
+- More examples are presented [here](doc/examples.md).
+- Some of the data items are explained [here](doc/data.md).
 
 # NuGet
 
