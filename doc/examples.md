@@ -10,6 +10,14 @@ var response = await client.SendRevenueAsync(record, EetMode.Verification);
 var client = new EetClient(certificate, EetEnvironment.Playground);
 ```
 
+### Timeouts
+
+The default HTTP request timeout is set to 2 seconds as per the Czech law. If you want to change it, you need to pass a parameter to the EetClient constructor:
+
+```csharp
+var client = new EetClient(certificate, EetEnvironment.Playground, httpTimeout: TimeSpan.FromSeconds(20));
+```
+
 ### Logging
 - Catchall logger:
 ```csharp
