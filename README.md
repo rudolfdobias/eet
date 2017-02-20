@@ -42,6 +42,9 @@ var record = new RevenueRecord(
     billNumber: new BillNumber("2016-321")
 );
 
+var securityCode = record.SecurityCode; // BKP
+var signature = record.Signature; // PKP
+
 var client = new EetClient(certificate);
 var response = await client.SendRevenueAsync(record);
 if (response.IsSuccess)
