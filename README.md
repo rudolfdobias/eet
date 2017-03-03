@@ -89,7 +89,7 @@ The time to implement this was kindly provided by [Mews Systems](http://mewssyst
 # Donate
 There is no need to donate the project, but thanks for considering it! Instead, if you like the project, star it here on GitHub :-)! Thanks!
 
-If you still insist on donation, we accept gummy bears at Mews Systems s.r.o., Helénská 4, Praha 2, 120 00. This project was, of course, powered by a huge pile of gummy bears ;-)
+If you still insist on donating, we accept gummy bears at Mews Systems s.r.o., Helénská 4, Praha 2, 120 00. This project was, of course, powered by a huge pile of gummy bears ;-)
 
 # Related projects
 - [eet-client](https://github.com/todvora/eet-client) by [@todvora](https://github.com/todvora): Java, MIT
