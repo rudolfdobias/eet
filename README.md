@@ -80,6 +80,7 @@ Code review: [@siroky](https://github.com/siroky), [@onashackem](https://github.
 - [Hlídač EET](http://hlidaceet.cz) - Watchdog of the EET API endpoint and related services.
 - Keszh, Neszh - [Hart](http://hartphp.com.pl/) Internal ERP System
 - [Ankerdata EasiPOS](http://easipos.ankerdata.com/) - POS system
+- [sySOft](http://www.sysoft.cz/) - POS system
 
 We would like to hear your story and know who users of the lib are. Please, thank us for providing the library by sharing with us, who you are and letting us add you into this list.
 
