@@ -117,7 +117,7 @@ namespace Mews.Eet.Tests.IntegrationTests
             var record = CreateSimpleRecord(certificate, Fixtures.First);
             var client = new EetClient(certificate, EetEnvironment.Playground);
 
-            var tasks = Enumerable.Range(0, 50).Select(i => client.SendRevenueAsync(record));
+            var tasks = Enumerable.Range(0, 10).Select(i => client.SendRevenueAsync(record));
             var ex = await Record.ExceptionAsync(async () => await Task.WhenAll(tasks).ConfigureAwait(continueOnCapturedContext: false));
             Assert.Null(ex);
         }

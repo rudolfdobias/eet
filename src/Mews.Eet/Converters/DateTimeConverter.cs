@@ -7,7 +7,7 @@ namespace Mews.Eet.Converters
         public static DateTime ToEetDateTime(DateTimeWithTimeZone dateTimeWithTimeZone)
         {
             var dateTimeUtc = TimeZoneInfo.ConvertTimeToUtc(dateTimeWithTimeZone.DateTime, dateTimeWithTimeZone.TimeZoneInfo);
-            var dateTimeCz = TimeZoneInfo.ConvertTimeFromUtc(dateTimeUtc, DateTimeWithTimeZone.CzechTimeZone);
+            var dateTimeCz = TimeZoneInfo.ConvertTimeFromUtc(dateTimeUtc, TimeZoneInfo.Local);
             return DateTime.SpecifyKind(new DateTime(dateTimeCz.Ticks - dateTimeCz.Ticks % TimeSpan.TicksPerSecond), DateTimeKind.Local);
         }
     }
