@@ -79,6 +79,8 @@ Code review: [@siroky](https://github.com/siroky), [@onashackem](https://github.
 - [Mews Systems](https://mewssystems.com) - Property Management Solution for the 21st century.
 - [Hlídač EET](http://hlidaceet.cz) - Watchdog of the EET API endpoint and related services.
 - Keszh, Neszh - [Hart](http://hartphp.com.pl/) Internal ERP System
+- [Ankerdata EasiPOS](http://easipos.ankerdata.com/) - POS system
+- [sySOft](http://www.sysoft.cz/) - POS system
 
 We would like to hear your story and know who users of the lib are. Please, thank us for providing the library by sharing with us, who you are and letting us add you into this list.
 
@@ -86,6 +88,8 @@ The time to implement this was kindly provided by [Mews Systems](http://mewssyst
 
 # Donate
 There is no need to donate the project, but thanks for considering it! Instead, if you like the project, star it here on GitHub :-)! Thanks!
+
+If you still insist on donating, we accept gummy bears at Mews Systems s.r.o., Helénská 4, Praha 2, 120 00. This project was, of course, powered by a huge pile of gummy bears ;-)
 
 # Related projects
 - [eet-client](https://github.com/todvora/eet-client) by [@todvora](https://github.com/todvora): Java, MIT
