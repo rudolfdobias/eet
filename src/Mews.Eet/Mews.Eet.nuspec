@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Mews.Eet</id>
-    <version>1.1.6</version>
+    <version>1.1.7</version>
     <title>$title$</title>
     <authors>Jiří Helmich</authors>
     <owners>Mews Systems</owners>
@@ -11,9 +11,9 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Client for EET - Czech fiscal machines.</description>
     <releaseNotes>
-      Fixed reporting of goods and deposits. Thanks Petr Kozemčák for spotting this.
+      Fixed timezone conversion issue. If your production environment is not in the CZ timezone, you need to update the library.
     </releaseNotes>
-    <copyright>Copyright 2016</copyright>
+    <copyright>Copyright 2017</copyright>
     <tags>EET Fiscal</tags>
   </metadata>
 </package>
