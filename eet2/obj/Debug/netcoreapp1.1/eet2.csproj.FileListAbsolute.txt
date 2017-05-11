@@ -1,0 +1,6 @@
+C:\Users\Já\documents\visual studio 2017\Projects\eet2\eet2\bin\Debug\netcoreapp1.1\eet2.deps.json
+C:\Users\Já\documents\visual studio 2017\Projects\eet2\eet2\bin\Debug\netcoreapp1.1\eet2.dll
+C:\Users\Já\documents\visual studio 2017\Projects\eet2\eet2\bin\Debug\netcoreapp1.1\eet2.pdb
+C:\Users\Já\documents\visual studio 2017\Projects\eet2\eet2\obj\Debug\netcoreapp1.1\eet2.AssemblyInfo.cs
+C:\Users\Já\documents\visual studio 2017\Projects\eet2\eet2\obj\Debug\netcoreapp1.1\eet2.dll
+C:\Users\Já\documents\visual studio 2017\Projects\eet2\eet2\obj\Debug\netcoreapp1.1\eet2.pdb

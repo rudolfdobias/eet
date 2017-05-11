@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Kocicak.EET</id>
+    <version>1.0.0</version>
+    <authors>MewsSystems / RD</authors>
+    <owners>MewsSystems / RD</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <projectUrl>https://github.com/MewsSystems/eet</projectUrl>
+    <description>Client for EET for .NET Core
+Based on https://github.com/MewsSystems/eet - ported for .NET Core by RD</description>
+    <dependencies>
+      <group targetFramework=".NETCoreApp1.1">
+        <dependency id="System.Security.Cryptography.Algorithms" version="4.3.0" exclude="Build,Analyzers" />
+        <dependency id="System.Security.Cryptography.Pkcs" version="4.3.0" exclude="Build,Analyzers" />
+        <dependency id="System.Xml.XmlDocument" version="4.3.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.NETCore.App" version="1.1.1" exclude="Build,Analyzers" />
+        <dependency id="System.Xml.XPath.XmlDocument" version="4.3.0" exclude="Build,Analyzers" />
+        <dependency id="System.Xml.XmlSerializer" version="4.3.0" exclude="Build,Analyzers" />
+        <dependency id="System.Security.Cryptography.Algorithms.Extensions" version="1.0.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="C:\Users\Já\documents\visual studio 2017\Projects\eet2\eet2\bin\Debug\netcoreapp1.1\eet2.dll" target="lib\netcoreapp1.1\eet2.dll" />
+  </files>
+</package>

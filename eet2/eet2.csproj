@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <PackageId>Kocicak.EET</PackageId>
+    <Authors>MewsSystems / RD</Authors>
+    <Company>MewsSystems</Company>
+    <Product>Kocicak.EET</Product>
+    <Description>Client for EET for .NET Core
+Based on https://github.com/MewsSystems/eet - ported for .NET Core by RD</Description>
+    <PackageProjectUrl>https://github.com/MewsSystems/eet</PackageProjectUrl>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageTags></PackageTags>
+    <RepositoryUrl></RepositoryUrl>
+    <RepositoryType></RepositoryType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Security.Cryptography.Algorithms" Version="4.3.0" />
+    <PackageReference Include="System.Security.Cryptography.Algorithms.Extensions" Version="1.0.0" />
+    <PackageReference Include="System.Security.Cryptography.Pkcs" Version="4.3.0" />
+    <PackageReference Include="System.Xml.XmlDocument" Version="4.3.0" />
+    <PackageReference Include="System.Xml.XmlSerializer" Version="4.3.0" />
+    <PackageReference Include="System.Xml.XPath.XmlDocument" Version="4.3.0" />
+  </ItemGroup>
+
+</Project>
